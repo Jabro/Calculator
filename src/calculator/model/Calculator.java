@@ -28,6 +28,7 @@ public class Calculator {
 	}
 
 	public void calculateResult() {
+		System.out.println("calculateResult");
 		raiseResultChangedEvent(new ResultChangedEvent(this, 3.0));
 	}
 	

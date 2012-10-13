@@ -36,7 +36,7 @@ public class DefaultCalculatorController implements CalculatorController, Comman
 		commands.add(new Command("-", new MinusOperator()));
 		commands.add(new Command("*", new MultiplicationOperator()));
 		commands.add(new Command("/", new DivisionOperator()));
-		commands.add(new Command("="));
+		commands.add(new Command("=", true));
 		commands.add(new Command("C"));
 		commands.add(new Command("sqrt"));
 	}
@@ -45,10 +45,12 @@ public class DefaultCalculatorController implements CalculatorController, Comman
 	public void onCommandEntered(CommandEnteredEvent event) {
 		Command command = event.getCommand();
 		System.out.println(command.getName());
-		if(command.getOperator() != null) {
+		if(command.isCalculationRequired()) {
+			calculator.calculateResult();
+		}
+		if(command.hasOperator()) {
 			calculator.setOperator(command.getOperator());
 		}
-		calculator.calculateResult();
 	}
 
 	@Override
