@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,13 +15,13 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.event.EventListenerList;
 
-import calculator.controller.CalculatorController;
+import calculator.controller.DefaultCalculatorController;
 import calculator.controller.Command;
 
 public class DefaultCalculatorView implements CalculatorView{
 
 	private EventListenerList listeners = new EventListenerList();
-	private CalculatorController calculatorController;
+	private DefaultCalculatorController controller;
 	private JTextField display;
 	
 	public static void main(String[] args) {
@@ -28,7 +29,7 @@ public class DefaultCalculatorView implements CalculatorView{
 	}
 	
 	public DefaultCalculatorView() {
-		calculatorController = new CalculatorController(this);
+		controller = new DefaultCalculatorController(this);
 		createFrame();
 	}
 
@@ -54,21 +55,21 @@ public class DefaultCalculatorView implements CalculatorView{
 		JPanel center = new JPanel();
 		center.setLayout(new GridLayout(3, 3, 0, 0));
 
+			
 		// Buttons
-		JButton[] buttons = new JButton[9];
-		for (int i = 0; i < buttons.length; i++) {
-			JButton button = new JButton(String.valueOf(i));
-			button.setBackground(Color.LIGHT_GRAY);
-			button.setActionCommand(String.valueOf(i));
+		Collection<Command> commands = controller.getCommands();
+		for (final Command command : commands) {
+			JButton button = new JButton(command.getName());
+			button.setBackground(Color.WHITE);
+			button.setActionCommand(command.getName());
 			button.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					raiseCommandEnteredEvent(new CommandEnteredEvent(this, new Command("sqrt")));
+					raiseCommandEnteredEvent(new CommandEnteredEvent(this, command));
 				}
 
 			});
-			buttons[i] = button;
 			center.add(button);
 		}	
 
