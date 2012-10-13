@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import calculator.model.Calculator;
-import calculator.model.CalculatorDisplay;
+import calculator.model.Display;
 import calculator.model.events.CalculatorEventListener;
+import calculator.model.events.DisplayChangedEvent;
+import calculator.model.events.DisplayEventListener;
 import calculator.model.events.ResultChangedEvent;
 import calculator.model.operator.DivisionOperator;
 import calculator.model.operator.MinusOperator;
@@ -17,21 +19,24 @@ import calculator.view.events.CommandEventListener;
 import calculator.view.events.InputEnteredEvent;
 import calculator.view.events.InputEventListener;
 
-public class DefaultCalculatorController implements CalculatorController, CommandEventListener, InputEventListener, CalculatorEventListener{
+public class DefaultCalculatorController implements CalculatorController,
+CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventListener{
 
 	private final Calculator calculator;
 	private final CalculatorView view;
 	private final Collection<Command>    commands    = new ArrayList<Command>();
 	private final Collection<InputValue> inputValues = new ArrayList<InputValue>();
-	private final CalculatorDisplay display;
+	private final Display display;
+	private boolean isNewOperand;
 
 	public DefaultCalculatorController(CalculatorView view) {
 		this.view = view;
 		view.addCommandListener(this);
 		view.addInputListener(this);
 		calculator = new Calculator();
-		calculator.addCalculatorListener(this);
-		display = new CalculatorDisplay();
+		calculator.addListener(this);
+		display = new Display();
+		display.addListener(this);
 		createCommands();
 		createInputValues();
 	}
@@ -45,20 +50,32 @@ public class DefaultCalculatorController implements CalculatorController, Comman
 		}
 		if(command.hasOperator()) {
 			calculator.setOperator(command.getOperator());
+			isNewOperand = true;
 		}
 	}
 
 	@Override
 	public void onInputEntered(InputEnteredEvent event) {
 		InputValue input = event.getInput();
+		if(isNewOperand){
+			display.clearDisplay();
+			isNewOperand = false;
+		}
 		if(input.isDigit()) {
 			display.addDigit(input.getDigit());
+		} else {
+			display.addContent(input.getValue());
 		}
 	}
 
 	@Override
 	public void onResultChanged(ResultChangedEvent event) {
-		view.updateDisplay(String.valueOf(event.getResult()));
+		display.setDisplay(event.getResult());
+	}
+
+	@Override
+	public void onDisplayChanged(DisplayChangedEvent event) {
+		view.updateDisplay(event.getContent());
 	}
 
 	@Override

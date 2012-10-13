@@ -11,11 +11,11 @@ public class Calculator {
 	private EventListenerList listeners = new EventListenerList();
 	private Operator operator;
 
-	public void addCalculatorListener(CalculatorEventListener listener) {
+	public void addListener(CalculatorEventListener listener) {
 		listeners.add(CalculatorEventListener.class, listener);
 	}
 	
-	public void removeCalculatorListener(CalculatorEventListener listener) {
+	public void removeListener(CalculatorEventListener listener) {
 		listeners.remove(CalculatorEventListener.class, listener);
 	}
 	
