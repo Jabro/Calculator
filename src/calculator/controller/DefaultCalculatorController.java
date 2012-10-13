@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import calculator.model.Calculator;
+import calculator.model.CalculatorDisplay;
 import calculator.model.events.CalculatorEventListener;
 import calculator.model.events.ResultChangedEvent;
 import calculator.model.operator.DivisionOperator;
@@ -22,6 +23,7 @@ public class DefaultCalculatorController implements CalculatorController, Comman
 	private final CalculatorView view;
 	private final Collection<Command>    commands    = new ArrayList<Command>();
 	private final Collection<InputValue> inputValues = new ArrayList<InputValue>();
+	private final CalculatorDisplay display;
 
 	public DefaultCalculatorController(CalculatorView view) {
 		this.view = view;
@@ -29,6 +31,7 @@ public class DefaultCalculatorController implements CalculatorController, Comman
 		view.addInputListener(this);
 		calculator = new Calculator();
 		calculator.addCalculatorListener(this);
+		display = new CalculatorDisplay();
 		createCommands();
 		createInputValues();
 	}
@@ -48,7 +51,9 @@ public class DefaultCalculatorController implements CalculatorController, Comman
 	@Override
 	public void onInputEntered(InputEnteredEvent event) {
 		InputValue input = event.getInput();
-		System.out.println(input.getValue());
+		if(input.isDigit()) {
+			display.addDigit(input.getDigit());
+		}
 	}
 
 	@Override
