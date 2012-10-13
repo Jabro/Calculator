@@ -37,7 +37,7 @@ public class Display {
 		}
 	}
 
-	public String getDisplay() {
+	public String getContent() {
 		return content;
 	}
 
@@ -57,6 +57,10 @@ public class Display {
 		for (DisplayEventListener listener : listeners.getListeners(DisplayEventListener.class)) {
 			listener.onDisplayChanged(event);
 		}
+	}
+
+	public double getNumber() {
+		return Double.valueOf(content);
 	}
 
 }

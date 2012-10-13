@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import calculator.model.Calculator;
 import calculator.model.Display;
+import calculator.model.Operand;
 import calculator.model.events.CalculatorEventListener;
 import calculator.model.events.DisplayChangedEvent;
 import calculator.model.events.DisplayEventListener;
@@ -45,12 +46,20 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	public void onCommandEntered(CommandEnteredEvent event) {
 		Command command = event.getCommand();
 		System.out.println(command.getName());
+		// +-*/=
 		if(command.isCalculationRequired()) {
+			// prevent overriding of the current operand
+			// with the last result
+			if(!isNewOperand) {
+				calculator.setOperand(new Operand(display.getNumber()));
+			}
 			calculator.calculateResult();
+			isNewOperand = true;
 		}
+		//TODO support clear
+		//TODO support square root
 		if(command.hasOperator()) {
 			calculator.setOperator(command.getOperator());
-			isNewOperand = true;
 		}
 	}
 

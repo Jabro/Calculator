@@ -10,6 +10,8 @@ public class Calculator {
 
 	private EventListenerList listeners = new EventListenerList();
 	private Operator operator;
+	private Operand lastOperand = new Operand(0);
+	private Operand operand     = new Operand(0);
 
 	public void addListener(CalculatorEventListener listener) {
 		listeners.add(CalculatorEventListener.class, listener);
@@ -30,8 +32,22 @@ public class Calculator {
 	}
 
 	public void calculateResult() {
-		System.out.println("calculateResult");
-		raiseResultChangedEvent(new ResultChangedEvent(this, 3.0));
+		//TODO maybe remove Operand class
+		//TODO add CalculationStrategy
+		//TODO support more than just plus
+		System.out.println("--------------");	
+		System.out.println(lastOperand.getNumber());	
+		System.out.println("+");	
+		System.out.println(operand.getNumber());		
+		double result = lastOperand.getNumber() + operand.getNumber();
+		lastOperand = new Operand(result);
+		System.out.println("= " + result);
+		System.out.println("--------------");	
+		raiseResultChangedEvent(new ResultChangedEvent(this, result ));
+	}
+
+	public void setOperand(Operand operand) {
+		this.operand = operand;
 	}
 	
 }
