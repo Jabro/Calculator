@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import calculator.model.Calculator;
-import calculator.model.CalculatorListener;
-import calculator.model.ResultChangedEvent;
+import calculator.model.events.CalculatorEventListener;
+import calculator.model.events.ResultChangedEvent;
 import calculator.model.operator.DivisionOperator;
 import calculator.model.operator.MinusOperator;
 import calculator.model.operator.MultiplicationOperator;
 import calculator.model.operator.PlusOperator;
 import calculator.view.CalculatorView;
-import calculator.view.CommandEnteredEvent;
-import calculator.view.CommandListener;
-import calculator.view.InputEnteredEvent;
-import calculator.view.InputListener;
+import calculator.view.events.CommandEnteredEvent;
+import calculator.view.events.CommandEventListener;
+import calculator.view.events.InputEnteredEvent;
+import calculator.view.events.InputEventListener;
 
-public class DefaultCalculatorController implements CalculatorController, CommandListener, InputListener, CalculatorListener{
+public class DefaultCalculatorController implements CalculatorController, CommandEventListener, InputEventListener, CalculatorEventListener{
 
 	private final Calculator calculator;
 	private final CalculatorView view;

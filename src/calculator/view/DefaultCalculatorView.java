@@ -2,7 +2,6 @@ package calculator.view;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.util.Arrays;
 import java.util.Collection;
 
 import javax.swing.JButton;
@@ -16,6 +15,14 @@ import calculator.controller.CalculatorController;
 import calculator.controller.Command;
 import calculator.controller.DefaultCalculatorController;
 import calculator.controller.InputValue;
+import calculator.view.buttons.ButtonBuilder;
+import calculator.view.buttons.ButtonListener;
+import calculator.view.buttons.CommandButtonBuilder;
+import calculator.view.buttons.InputButtonBuilder;
+import calculator.view.events.CommandEnteredEvent;
+import calculator.view.events.CommandEventListener;
+import calculator.view.events.InputEnteredEvent;
+import calculator.view.events.InputEventListener;
 
 public class DefaultCalculatorView implements CalculatorView, ButtonListener{
 
@@ -97,30 +104,30 @@ public class DefaultCalculatorView implements CalculatorView, ButtonListener{
 		raiseInputEnteredEvent(new InputEnteredEvent(this, input));
 	}
 
-	public void addCommandListener(CommandListener listener) {
-		listeners.add(CommandListener.class, listener);
+	public void addCommandListener(CommandEventListener listener) {
+		listeners.add(CommandEventListener.class, listener);
 	}
 
-	public void removeCommandListener(CommandListener listener) {
-		listeners.remove(CommandListener.class, listener);
+	public void removeCommandListener(CommandEventListener listener) {
+		listeners.remove(CommandEventListener.class, listener);
 	}
 
-	public void addInputListener(InputListener listener) {
-		listeners.add(InputListener.class, listener);
+	public void addInputListener(InputEventListener listener) {
+		listeners.add(InputEventListener.class, listener);
 	}
 
-	public void removeInputListener(InputListener listener) {
-		listeners.remove(InputListener.class, listener);
+	public void removeInputListener(InputEventListener listener) {
+		listeners.remove(InputEventListener.class, listener);
 	}
 
 	private void raiseCommandEnteredEvent(CommandEnteredEvent event) {
-		for (CommandListener listener : listeners.getListeners(CommandListener.class)) {
+		for (CommandEventListener listener : listeners.getListeners(CommandEventListener.class)) {
 			listener.onCommandEntered(event);
 		}
 	}
 
 	private void raiseInputEnteredEvent(InputEnteredEvent event) {
-		for (InputListener listener : listeners.getListeners(InputListener.class)) {
+		for (InputEventListener listener : listeners.getListeners(InputEventListener.class)) {
 			listener.onInputEntered(event);
 		}
 	}
