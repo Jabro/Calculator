@@ -30,10 +30,6 @@ public class DefaultCalculatorView implements CalculatorView, ButtonListener{
 	private CalculatorController controller;
 	private JTextField display;
 
-	public static void main(String[] args) {
-		new DefaultCalculatorView();
-	}
-
 	public DefaultCalculatorView() {
 		controller = new DefaultCalculatorController(this);
 		createFrame();
