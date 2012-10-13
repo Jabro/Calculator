@@ -42,4 +42,9 @@ public class Command {
 		return isCalculationRequired;
 	}
 	
+	@Override
+	public String toString() {
+		return getName();
+	}
+	
 }

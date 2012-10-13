@@ -9,6 +9,14 @@ public class InputValue {
 		this.name = name;
 		this.value = value;	
 	}
+	
+	public InputValue(String value) {
+		name = this.value = value;	
+	}
+
+	public InputValue(int digit) {
+		name = value = String.valueOf(digit);
+	}
 
 	public String getValue() {
 		return value;
@@ -16,6 +24,11 @@ public class InputValue {
 
 	public String getName() {
 		return name;
+	}
+	
+	@Override
+	public String toString() {
+		return getName();
 	}
 	
 }

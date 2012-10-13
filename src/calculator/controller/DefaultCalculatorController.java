@@ -20,7 +20,8 @@ public class DefaultCalculatorController implements CalculatorController, Comman
 
 	private final Calculator calculator;
 	private final CalculatorView view;
-	private final Collection<Command> commands = new ArrayList<>();
+	private final Collection<Command>    commands    = new ArrayList<Command>();
+	private final Collection<InputValue> inputValues = new ArrayList<InputValue>();
 
 	public DefaultCalculatorController(CalculatorView view) {
 		this.view = view;
@@ -29,16 +30,7 @@ public class DefaultCalculatorController implements CalculatorController, Comman
 		calculator = new Calculator();
 		calculator.addCalculatorListener(this);
 		createCommands();
-	}
-
-	private void createCommands() {
-		commands.add(new Command("+", new PlusOperator()));
-		commands.add(new Command("-", new MinusOperator()));
-		commands.add(new Command("*", new MultiplicationOperator()));
-		commands.add(new Command("/", new DivisionOperator()));
-		commands.add(new Command("=", true));
-		commands.add(new Command("C"));
-		commands.add(new Command("sqrt"));
+		createInputValues();
 	}
 
 	@Override
@@ -55,8 +47,8 @@ public class DefaultCalculatorController implements CalculatorController, Comman
 
 	@Override
 	public void onInputEntered(InputEnteredEvent event) {
-		// TODO Auto-generated method stub
-
+		InputValue input = event.getInput();
+		System.out.println(input.getValue());
 	}
 
 	@Override
@@ -67,6 +59,28 @@ public class DefaultCalculatorController implements CalculatorController, Comman
 	@Override
 	public Collection<Command> getCommands() {
 		return commands;
+	}
+
+	@Override
+	public Collection<InputValue> getInputValues() {
+		return inputValues;
+	}
+
+	private void createCommands() {
+		commands.add(new Command("+", new PlusOperator()));
+		commands.add(new Command("-", new MinusOperator()));
+		commands.add(new Command("*", new MultiplicationOperator()));
+		commands.add(new Command("/", new DivisionOperator()));
+		commands.add(new Command("=", true));
+		commands.add(new Command("C"));
+		commands.add(new Command("sqrt"));
+	}
+
+	private void createInputValues() {
+		for (int i = 0; i <= 9; i++) {
+			inputValues.add(new InputValue(i));
+		}
+		inputValues.add(new InputValue("."));
 	}
 
 
