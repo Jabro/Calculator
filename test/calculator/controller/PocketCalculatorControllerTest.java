@@ -6,7 +6,7 @@ import calculator.model.Operator;
 import calculator.test.framework.CalculationTestSupport;
 import calculator.test.framework.MockCalculatorView;
 
-public class CalculatorControllerTest implements CalculationTestSupport {
+public class PocketCalculatorControllerTest implements CalculationTestSupport {
 
 	private static final int FIRST_DIGIT  = 3;
 	private static final int SECOND_DIGIT = 4;
@@ -80,7 +80,7 @@ public class CalculatorControllerTest implements CalculationTestSupport {
 
 	private MockCalculatorView createMock() {
 		MockCalculatorView mock = new MockCalculatorView();
-		new DefaultCalculatorController(mock);
+		new PocketCalculatorController(mock);
 		return mock;
 	}
 

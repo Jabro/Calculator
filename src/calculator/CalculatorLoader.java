@@ -3,19 +3,23 @@ package calculator;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import calculator.controller.DefaultCalculatorController;
+import calculator.controller.PocketCalculatorController;
 import calculator.view.CalculatorView;
-import calculator.view.DefaultCalculatorView;
+import calculator.view.PocketCalculatorView;
 
 public class CalculatorLoader {
 
 	public static void main(String[] args) {
+		startPocketCalculator();
+	}
+
+	private static void startPocketCalculator() {
 		// views
 		Collection<CalculatorView> views = new ArrayList<CalculatorView>();
-		views.add(new DefaultCalculatorView());
-		views.add(new DefaultCalculatorView());
+		views.add(new PocketCalculatorView());
+		views.add(new PocketCalculatorView());
 		// controller
-		new DefaultCalculatorController(views);
+		new PocketCalculatorController(views);
 	}
 
 }

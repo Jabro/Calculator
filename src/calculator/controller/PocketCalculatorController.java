@@ -16,7 +16,7 @@ import calculator.view.events.CommandEventListener;
 import calculator.view.events.InputEnteredEvent;
 import calculator.view.events.InputEventListener;
 
-public class DefaultCalculatorController implements CalculatorController,
+public class PocketCalculatorController implements CalculatorController,
 CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventListener{
 
 	private final Calculator calculator;
@@ -24,7 +24,7 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	private final Display display;
 	private Double operand;
 
-	public DefaultCalculatorController(Collection<CalculatorView> views) {
+	public PocketCalculatorController(Collection<CalculatorView> views) {
 		// models
 		calculator = new Calculator();
 		calculator.addListener(this);
@@ -37,7 +37,7 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 		this.views = views;
 	}
 
-	public DefaultCalculatorController(CalculatorView view) {
+	public PocketCalculatorController(CalculatorView view) {
 		// models
 		calculator = new Calculator();
 		calculator.addListener(this);
