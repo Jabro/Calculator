@@ -50,8 +50,8 @@ public class MockCalculatorView implements CalculatorView, CalculationTestSuppor
 	}
 
 	@Override
-	public void updateDisplay(String content) {
-		this.content = content;		
+	public void updateDisplay(Display display) {
+		this.content = display.getContent();		
 	}
 
 	@Override

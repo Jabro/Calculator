@@ -26,7 +26,7 @@ public class Display {
 
 	private void setContent(String content) {
 		this.content = content;
-		raiseDisplayChangedEvent(new DisplayChangedEvent(this, content));
+		raiseDisplayChangedEvent(new DisplayChangedEvent(this, this));
 	}
 
 	public void addContent(String suffix) {

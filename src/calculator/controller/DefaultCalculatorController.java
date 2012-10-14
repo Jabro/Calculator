@@ -99,7 +99,7 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	@Override
 	public void onDisplayChanged(DisplayChangedEvent event) {
 		for (CalculatorView view : views) {
-			view.updateDisplay(event.getContent());
+			view.updateDisplay(event.getDisplay());
 		}
 	}
 

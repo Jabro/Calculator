@@ -89,8 +89,8 @@ public class DefaultCalculatorView implements CalculatorView, ButtonListener{
 	}
 
 	@Override
-	public void updateDisplay(String content) {
-		displayField.setText(content);
+	public void updateDisplay(Display display) {
+		displayField.setText(display.getContent());
 	}
 
 	@Override

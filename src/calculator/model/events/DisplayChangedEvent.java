@@ -2,18 +2,20 @@ package calculator.model.events;
 
 import java.util.EventObject;
 
+import calculator.model.Display;
+
 public class DisplayChangedEvent extends EventObject{
 
 	private static final long serialVersionUID = 1150745927450884358L;
-	private final String content;
+	private final Display display;
 	
-	public DisplayChangedEvent(Object source, String content) {
+	public DisplayChangedEvent(Object source, Display display) {
 		super(source);
-		this.content = content;		
+		this.display = display;		
 	}
 
-	public String getContent() {
-		return content;
+	public Display getDisplay() {
+		return display;
 	}
 	
 }

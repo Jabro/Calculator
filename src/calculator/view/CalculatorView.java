@@ -18,7 +18,7 @@ public interface CalculatorView {
 	
 	public void removeInputListener(InputEventListener listener) ;
 	
-	public void updateDisplay(String content);
+	public void updateDisplay(Display display);
 
 	public void setModels(Collection<Command> commands,
 			Collection<InputValue> inputValues, Display display);
