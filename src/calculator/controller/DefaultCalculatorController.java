@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import calculator.model.Calculator;
 import calculator.model.Display;
-import calculator.model.Operand;
 import calculator.model.events.CalculatorEventListener;
 import calculator.model.events.DisplayChangedEvent;
 import calculator.model.events.DisplayEventListener;
@@ -28,16 +27,18 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	private final Collection<Command>    commands    = new ArrayList<Command>();
 	private final Collection<InputValue> inputValues = new ArrayList<InputValue>();
 	private final Display display;
-	private Operand operand;
+	private Double operand;
 
 	public DefaultCalculatorController(CalculatorView view) {
-		this.view = view;
-		view.addCommandListener(this);
-		view.addInputListener(this);
 		calculator = new Calculator();
 		calculator.addListener(this);
 		display = new Display();
 		display.addListener(this);
+		this.view = view;
+		view.addCommandListener(this);
+		view.addInputListener(this);
+		//view.createFrame
+		//view.updateDisplay(display.getContent());
 		createCommands();
 		createInputValues();
 	}
@@ -66,19 +67,6 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	@Override
 	public void onInputEntered(InputEnteredEvent event) {
 		InputValue input = event.getInput();
-		addInputToDisplay(input);
-		readNumberFromDisplay();
-	}
-
-	public void readNumberFromDisplay() {
-		if(isNewOperand()) {
-			operand = new Operand(display.getNumber());
-		} else {
-			operand.setNumber(display.getNumber());
-		}
-	}
-
-	public void addInputToDisplay(InputValue input) {
 		if(isNewOperand()){
 			display.clearDisplay();
 		}
@@ -87,6 +75,7 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 		} else {
 			display.addContent(input.getValue());
 		}
+		operand = display.getNumber();
 	}
 
 	public void deleteOperand() {

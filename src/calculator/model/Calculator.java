@@ -10,8 +10,8 @@ public class Calculator {
 
 	private EventListenerList listeners = new EventListenerList();
 	private Operator operator;
-	private Operand lastOperand = new Operand(0);
-	private Operand operand     = new Operand(0);
+	private double lastOperand = 0;
+	private double operand     = 0;
 
 	public void addListener(CalculatorEventListener listener) {
 		listeners.add(CalculatorEventListener.class, listener);
@@ -36,17 +36,17 @@ public class Calculator {
 		//TODO add CalculationStrategy
 		//TODO support more than just plus
 		System.out.println("--------------");	
-		System.out.println(lastOperand.getNumber());	
+		System.out.println(lastOperand);	
 		System.out.println("+");	
-		System.out.println(operand.getNumber());		
-		double result = lastOperand.getNumber() + operand.getNumber();
-		lastOperand = new Operand(result);
+		System.out.println(operand);		
+		double result = lastOperand + operand;
+		lastOperand = result;
 		System.out.println("= " + result);
 		System.out.println("--------------");	
 		raiseResultChangedEvent(new ResultChangedEvent(this, result ));
 	}
 
-	public void setOperand(Operand operand) {
+	public void setOperand(double operand) {
 		this.operand = operand;
 	}
 	

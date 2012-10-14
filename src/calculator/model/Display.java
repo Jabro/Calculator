@@ -7,6 +7,7 @@ import calculator.model.events.DisplayEventListener;
 
 public class Display {
 
+	private static final String DEZIMAL_POINT = ".";
 	private static final String INITIAL_VALUE = "0";
 	private String content;
 	private EventListenerList listeners = new EventListenerList();
@@ -30,11 +31,19 @@ public class Display {
 	}
 
 	public void addContent(String suffix) {
-		if(content.startsWith(INITIAL_VALUE)) {
+		if(isInitialDisplay() && !isDezimalPoint(suffix)) {
 			setContent(suffix);
 		} else {
 			setContent(content + suffix);
 		}
+	}
+
+	public boolean isDezimalPoint(String suffix) {
+		return suffix.equals(DEZIMAL_POINT);
+	}
+
+	public boolean isInitialDisplay() {
+		return content.length() <= 1 && content.startsWith(INITIAL_VALUE);
 	}
 
 	public String getContent() {
