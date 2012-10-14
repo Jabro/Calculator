@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class CalculatorTest implements CalculationTest {
+import calculator.test.framework.CalculationTestSupport;
+
+public class CalculatorTest implements CalculationTestSupport {
 
 	@Test
 	public void testPlus() {

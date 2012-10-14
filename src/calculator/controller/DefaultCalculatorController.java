@@ -32,12 +32,21 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 		display.addListener(this);
 		// views
 		for (CalculatorView view : views) {
-			view.addCommandListener(this);
-			view.addInputListener(this);
-			view.setModels(createCommands(), createInputValues(), display);
-			view.initilize();
+			configurateView(view);
 		}
 		this.views = views;
+	}
+
+	public DefaultCalculatorController(CalculatorView view) {
+		// models
+		calculator = new Calculator();
+		calculator.addListener(this);
+		display = new Display();
+		display.addListener(this);
+		// views
+		views = new ArrayList<CalculatorView>();
+		views.add(view);
+		configurateView(view);		
 	}
 
 	@Override
@@ -92,6 +101,13 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 		for (CalculatorView view : views) {
 			view.updateDisplay(event.getContent());
 		}
+	}
+
+	private void configurateView(CalculatorView view) {
+		view.addCommandListener(this);
+		view.addInputListener(this);
+		view.setModels(createCommands(), createInputValues(), display);
+		view.initilize();
 	}
 
 	private Collection<Command> createCommands() {

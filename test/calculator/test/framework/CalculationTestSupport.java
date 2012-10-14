@@ -1,6 +1,6 @@
-package calculator.model;
+package calculator.test.framework;
 
-public interface CalculationTest {
+public interface CalculationTestSupport {
 
 	static final double INACCURACY     = 0.0000000001;
 	static final double FIRST_OPERAND  = 3.0;

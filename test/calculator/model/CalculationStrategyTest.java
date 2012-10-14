@@ -8,8 +8,9 @@ import calculator.model.calculation.strategies.DivisionCalculationStrategy;
 import calculator.model.calculation.strategies.MinusCalculationStrategy;
 import calculator.model.calculation.strategies.MultiplicationCalculationStrategy;
 import calculator.model.calculation.strategies.PlusCalculationStrategy;
+import calculator.test.framework.CalculationTestSupport;
 
-public class CalculationStrategyTest implements CalculationTest {
+public class CalculationStrategyTest implements CalculationTestSupport {
 	
 	@Test
 	public void testPlus() {
