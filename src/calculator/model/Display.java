@@ -13,10 +13,10 @@ public class Display {
 	private EventListenerList listeners = new EventListenerList();
 
 	public Display() {
-		clearDisplay();
+		clear();
 	}
 
-	public void clearDisplay() {
+	public void clear() {
 		setContent(INITIAL_VALUE);
 	}
 

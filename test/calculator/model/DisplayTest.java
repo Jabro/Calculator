@@ -15,7 +15,7 @@ public class DisplayTest {
 	public void testClearDisplay() {
 		Display display = new Display();
 		display.setDisplay(20.0);
-		display.clearDisplay();
+		display.clear();
 		assertEquals("0", display.getContent());
 	}
 
@@ -45,7 +45,7 @@ public class DisplayTest {
 	@Test
 	public void testAddContentToClearedDisplay() {
 		Display display = new Display();
-		display.clearDisplay();
+		display.clear();
 		display.addContent(".");
 		assertEquals("0.", display.getContent());
 	}
@@ -65,7 +65,7 @@ public class DisplayTest {
 	@Test
 	public void testIsInitialDisplay() {
 		Display display = new Display();
-		display.clearDisplay();
+		display.clear();
 		assertTrue(display.isInitialDisplay());
 	}
 	

@@ -68,7 +68,7 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	public void onInputEntered(InputEnteredEvent event) {
 		InputValue input = event.getInput();
 		if(isNewOperand()){
-			display.clearDisplay();
+			display.clear();
 		}
 		if(input.isDigit()) {
 			display.addDigit(input.getDigit());
