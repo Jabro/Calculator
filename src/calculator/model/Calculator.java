@@ -2,9 +2,9 @@ package calculator.model;
 
 import javax.swing.event.EventListenerList;
 
+import calculator.model.calculation.strategies.PlusCalculationStrategy;
 import calculator.model.events.CalculatorEventListener;
 import calculator.model.events.ResultChangedEvent;
-import calculator.model.operator.Operator;
 
 public class Calculator {
 
@@ -32,14 +32,13 @@ public class Calculator {
 	}
 
 	public double calculateResult() {
-		//TODO maybe remove Operand class
-		//TODO add CalculationStrategy
-		//TODO support more than just plus
 		System.out.println("--------------");	
 		System.out.println(lastOperand);	
 		System.out.println("+");	
-		System.out.println(operand);		
-		double result = lastOperand + operand;
+		System.out.println(operand);	
+		//TODO support more than just plus
+		//TODO select calculation strategy depending on operator
+		double result = new PlusCalculationStrategy().calculate(lastOperand, operand);
 		lastOperand = result;
 		System.out.println("= " + result);
 		System.out.println("--------------");	

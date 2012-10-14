@@ -5,14 +5,11 @@ import java.util.Collection;
 
 import calculator.model.Calculator;
 import calculator.model.Display;
+import calculator.model.Operator;
 import calculator.model.events.CalculatorEventListener;
 import calculator.model.events.DisplayChangedEvent;
 import calculator.model.events.DisplayEventListener;
 import calculator.model.events.ResultChangedEvent;
-import calculator.model.operator.DivisionOperator;
-import calculator.model.operator.MinusOperator;
-import calculator.model.operator.MultiplicationOperator;
-import calculator.model.operator.PlusOperator;
 import calculator.view.CalculatorView;
 import calculator.view.events.CommandEnteredEvent;
 import calculator.view.events.CommandEventListener;
@@ -100,10 +97,10 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 
 	private Collection<Command> createCommands() {
 		final Collection<Command> commands = new ArrayList<Command>();
-		commands.add(new Command("+", new PlusOperator()));
-		commands.add(new Command("-", new MinusOperator()));
-		commands.add(new Command("*", new MultiplicationOperator()));
-		commands.add(new Command("/", new DivisionOperator()));
+		commands.add(new Command("+", Operator.PLUS));
+		commands.add(new Command("-", Operator.MINUS));
+		commands.add(new Command("*", Operator.MULTIPLICATION));
+		commands.add(new Command("/", Operator.DIVISION));
 		commands.add(new Command("=", true));
 		commands.add(new Command("C"));
 		commands.add(new Command("sqrt"));

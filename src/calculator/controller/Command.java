@@ -1,6 +1,6 @@
 package calculator.controller;
 
-import calculator.model.operator.Operator;
+import calculator.model.Operator;
 
 public class Command {
 
