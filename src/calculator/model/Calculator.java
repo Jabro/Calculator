@@ -2,7 +2,6 @@ package calculator.model;
 
 import javax.swing.event.EventListenerList;
 
-import calculator.model.calculation.strategies.PlusCalculationStrategy;
 import calculator.model.events.CalculatorEventListener;
 import calculator.model.events.ResultChangedEvent;
 
@@ -10,6 +9,8 @@ public class Calculator {
 
 	private EventListenerList listeners = new EventListenerList();
 	private Operator operator;
+	private boolean operandIsSet = false;
+	private boolean lastOperandIsSet = false;
 	private double lastOperand = 0;
 	private double operand     = 0;
 
@@ -38,16 +39,26 @@ public class Calculator {
 		System.out.println(operand);	
 		//TODO support more than just plus
 		//TODO select calculation strategy depending on operator
+		if (operator != null){
 		double result = operator.getCalculationStrategy().calculate(lastOperand, operand);
 		lastOperand = result;
 		System.out.println("= " + result);
 		System.out.println("--------------");	
 		raiseResultChangedEvent(new ResultChangedEvent(this, result ));
 		return result;
+		} else {
+			
+			return operand;
+		}
 	}
 
 	public void setOperand(double operand) {
-		this.operand = operand;
+		if (operandIsSet){
+			this.lastOperand = this.operand;
+			this.operand = operand;
+		} else {
+			this.operand = operand;
+		}
 	}
 	
 }

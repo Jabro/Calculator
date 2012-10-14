@@ -9,17 +9,13 @@ public enum Operator {
 	DIVISION(new DivisionCalculationStrategy());
 	
 	
-	private CalculationStrategy calculationStrategy;
+	private final CalculationStrategy calculationStrategy;
 
 	Operator(CalculationStrategy strategy){
-		this.setCalculationStrategy(strategy);
+		calculationStrategy = strategy;
 	}
 
 	public CalculationStrategy getCalculationStrategy() {
 		return calculationStrategy;
-	}
-
-	public void setCalculationStrategy(CalculationStrategy calculationStrategy) {
-		this.calculationStrategy = calculationStrategy;
 	}
 }
