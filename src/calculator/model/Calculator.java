@@ -38,7 +38,7 @@ public class Calculator {
 		System.out.println(operand);	
 		//TODO support more than just plus
 		//TODO select calculation strategy depending on operator
-		double result = new PlusCalculationStrategy().calculate(lastOperand, operand);
+		double result = operator.getCalculationStrategy().calculate(lastOperand, operand);
 		lastOperand = result;
 		System.out.println("= " + result);
 		System.out.println("--------------");	
