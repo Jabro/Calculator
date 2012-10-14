@@ -12,7 +12,6 @@ import javax.swing.WindowConstants;
 import javax.swing.event.EventListenerList;
 
 import calculator.controller.Command;
-import calculator.controller.DefaultCalculatorController;
 import calculator.controller.InputValue;
 import calculator.model.Display;
 import calculator.view.buttons.ButtonBuilder;
@@ -28,15 +27,20 @@ public class DefaultCalculatorView implements CalculatorView, ButtonListener{
 
 	private EventListenerList listeners = new EventListenerList();
 	private JTextField displayField;
-
-	public DefaultCalculatorView() {
-		new DefaultCalculatorController(this);
-	}
+	private Collection<Command> commands;
+	private Collection<InputValue> inputValues;
+	private Display display;
 
 	@Override
-	public void createFrame(Collection<Command> commands,
+	public void setModels(Collection<Command> commands,
 			Collection<InputValue> inputValues, Display display) {
-		
+				this.commands = commands;
+				this.inputValues = inputValues;
+				this.display = display;
+	}
+	
+	@Override
+	public void initilize() {
 		JButton[] inputButtons = buildButtons(inputValues, new InputButtonBuilder());
 		JButton[] commandButtons = buildButtons(commands, new CommandButtonBuilder());
 				

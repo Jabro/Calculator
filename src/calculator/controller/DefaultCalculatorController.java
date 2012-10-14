@@ -23,19 +23,24 @@ public class DefaultCalculatorController implements CalculatorController,
 CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventListener{
 
 	private final Calculator calculator;
-	private final CalculatorView view;
+	private final Collection<CalculatorView> views;
 	private final Display display;
 	private Double operand;
 
-	public DefaultCalculatorController(CalculatorView view) {
+	public DefaultCalculatorController(Collection<CalculatorView> views) {
+		// models
 		calculator = new Calculator();
 		calculator.addListener(this);
 		display = new Display();
 		display.addListener(this);
-		this.view = view;
-		view.addCommandListener(this);
-		view.addInputListener(this);
-		view.createFrame(createCommands(), createInputValues(), display);
+		// views
+		for (CalculatorView view : views) {
+			view.addCommandListener(this);
+			view.addInputListener(this);
+			view.setModels(createCommands(), createInputValues(), display);
+			view.initilize();
+		}
+		this.views = views;
 	}
 
 	@Override
@@ -88,7 +93,9 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 
 	@Override
 	public void onDisplayChanged(DisplayChangedEvent event) {
-		view.updateDisplay(event.getContent());
+		for (CalculatorView view : views) {
+			view.updateDisplay(event.getContent());
+		}
 	}
 
 	private Collection<Command> createCommands() {

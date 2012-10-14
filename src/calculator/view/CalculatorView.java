@@ -20,7 +20,9 @@ public interface CalculatorView {
 	
 	public void updateDisplay(String content);
 
-	public void createFrame(Collection<Command> commands,
+	public void setModels(Collection<Command> commands,
 			Collection<InputValue> inputValues, Display display);
+
+	public void initilize();
 
 }
