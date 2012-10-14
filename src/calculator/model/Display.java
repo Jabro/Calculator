@@ -49,8 +49,16 @@ public class Display {
 		return content;
 	}
 
-	public void setDisplay(double result) {
-		setContent(String.valueOf(result));
+	public void setDisplay(Double number) {
+		if(isInteger(number)) {
+			setContent(String.valueOf(number.intValue()));
+		} else {		
+			setContent(String.valueOf(number));
+		}
+	}
+
+	private boolean isInteger(Double number) {
+		return number.intValue() == number;
 	}
 
 	public void addListener(DisplayEventListener listener) {

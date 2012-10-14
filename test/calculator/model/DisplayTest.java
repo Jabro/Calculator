@@ -80,7 +80,7 @@ public class DisplayTest {
 	public void testSetDisplay() {
 		Display display = new Display();
 		display.setDisplay(20.0);
-		assertEquals("20.0", display.getContent());
+		assertEquals("20", display.getContent());
 	}
 
 }
