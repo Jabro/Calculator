@@ -31,7 +31,7 @@ public class Calculator {
 		this.operator = operator;		
 	}
 
-	public void calculateResult() {
+	public double calculateResult() {
 		//TODO maybe remove Operand class
 		//TODO add CalculationStrategy
 		//TODO support more than just plus
@@ -44,6 +44,7 @@ public class Calculator {
 		System.out.println("= " + result);
 		System.out.println("--------------");	
 		raiseResultChangedEvent(new ResultChangedEvent(this, result ));
+		return result;
 	}
 
 	public void setOperand(double operand) {
