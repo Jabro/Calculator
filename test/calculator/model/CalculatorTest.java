@@ -4,9 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class CalculatorTest {
-
-	private static final double INACCURACY = 0.0000000001;
+public class CalculatorTest implements CalculationTest {
 
 	@Test
 	public void testPlusCalculate() {
