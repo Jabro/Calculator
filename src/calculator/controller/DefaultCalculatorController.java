@@ -24,8 +24,6 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 
 	private final Calculator calculator;
 	private final CalculatorView view;
-	private final Collection<Command>    commands    = new ArrayList<Command>();
-	private final Collection<InputValue> inputValues = new ArrayList<InputValue>();
 	private final Display display;
 	private Double operand;
 
@@ -37,10 +35,7 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 		this.view = view;
 		view.addCommandListener(this);
 		view.addInputListener(this);
-		//view.createFrame
-		//view.updateDisplay(display.getContent());
-		createCommands();
-		createInputValues();
+		view.createFrame(createCommands(), createInputValues(), display);
 	}
 
 	@Override
@@ -96,17 +91,8 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 		view.updateDisplay(event.getContent());
 	}
 
-	@Override
-	public Collection<Command> getCommands() {
-		return commands;
-	}
-
-	@Override
-	public Collection<InputValue> getInputValues() {
-		return inputValues;
-	}
-
-	private void createCommands() {
+	private Collection<Command> createCommands() {
+		final Collection<Command> commands = new ArrayList<Command>();
 		commands.add(new Command("+", new PlusOperator()));
 		commands.add(new Command("-", new MinusOperator()));
 		commands.add(new Command("*", new MultiplicationOperator()));
@@ -114,13 +100,16 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 		commands.add(new Command("=", true));
 		commands.add(new Command("C"));
 		commands.add(new Command("sqrt"));
+		return commands;
 	}
 
-	private void createInputValues() {
+	private Collection<InputValue> createInputValues() {
+		final Collection<InputValue> inputValues = new ArrayList<InputValue>();
 		for (int i = 0; i <= 9; i++) {
 			inputValues.add(new InputValue(i));
 		}
 		inputValues.add(new InputValue("."));
+		return inputValues;
 	}
 
 

@@ -11,10 +11,10 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.event.EventListenerList;
 
-import calculator.controller.CalculatorController;
 import calculator.controller.Command;
 import calculator.controller.DefaultCalculatorController;
 import calculator.controller.InputValue;
+import calculator.model.Display;
 import calculator.view.buttons.ButtonBuilder;
 import calculator.view.buttons.ButtonListener;
 import calculator.view.buttons.CommandButtonBuilder;
@@ -27,37 +27,36 @@ import calculator.view.events.InputEventListener;
 public class DefaultCalculatorView implements CalculatorView, ButtonListener{
 
 	private EventListenerList listeners = new EventListenerList();
-	private CalculatorController controller;
-	private JTextField display;
+	private JTextField displayField;
 
 	public DefaultCalculatorView() {
-		controller = new DefaultCalculatorController(this);
-		createFrame();
+		new DefaultCalculatorController(this);
 	}
 
-	private void createFrame() {
-		JButton[] inputButtons = buildButtons(controller.getInputValues(),
-				new InputButtonBuilder());
-		JButton[] commandButtons = buildButtons(controller.getCommands(),
-				new CommandButtonBuilder());
+	@Override
+	public void createFrame(Collection<Command> commands,
+			Collection<InputValue> inputValues, Display display) {
+		
+		JButton[] inputButtons = buildButtons(inputValues, new InputButtonBuilder());
+		JButton[] commandButtons = buildButtons(commands, new CommandButtonBuilder());
 				
-		createDisplay();
+		createDisplayField(display);
 		JPanel panel = createPanel();
 		addButtons(panel, inputButtons);
 		addButtons(panel, commandButtons);
 		
 		JFrame frame = new JFrame("Calculator");
 		frame.setLayout(new BorderLayout());
-		frame.add(display, BorderLayout.NORTH);
+		frame.add(displayField, BorderLayout.NORTH);
 		frame.add(panel);		
 		frame.setSize(350, 350);		
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
-	private void createDisplay() {
-		display = new JTextField();
-		display.setEditable(false);
+	private void createDisplayField(Display display) {
+		displayField = new JTextField(display.getContent());
+		displayField.setEditable(false);
 	}
 
 	private JPanel createPanel() {
@@ -87,7 +86,7 @@ public class DefaultCalculatorView implements CalculatorView, ButtonListener{
 
 	@Override
 	public void updateDisplay(String content) {
-		display.setText(content);
+		displayField.setText(content);
 	}
 
 	@Override
