@@ -28,7 +28,7 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	private final Collection<Command>    commands    = new ArrayList<Command>();
 	private final Collection<InputValue> inputValues = new ArrayList<InputValue>();
 	private final Display display;
-	private boolean isNewOperand;
+	private Operand operand;
 
 	public DefaultCalculatorController(CalculatorView view) {
 		this.view = view;
@@ -50,11 +50,11 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 		if(command.isCalculationRequired()) {
 			// prevent overriding of the current operand
 			// with the last result
-			if(!isNewOperand) {
-				calculator.setOperand(new Operand(display.getNumber()));
+			if(!isNewOperand()) {
+				calculator.setOperand(operand);
 			}
 			calculator.calculateResult();
-			isNewOperand = true;
+			deleteOperand();
 		}
 		//TODO support clear
 		//TODO support square root
@@ -66,15 +66,35 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	@Override
 	public void onInputEntered(InputEnteredEvent event) {
 		InputValue input = event.getInput();
-		if(isNewOperand){
+		addInputToDisplay(input);
+		readNumberFromDisplay();
+	}
+
+	public void readNumberFromDisplay() {
+		if(isNewOperand()) {
+			operand = new Operand(display.getNumber());
+		} else {
+			operand.setNumber(display.getNumber());
+		}
+	}
+
+	public void addInputToDisplay(InputValue input) {
+		if(isNewOperand()){
 			display.clearDisplay();
-			isNewOperand = false;
 		}
 		if(input.isDigit()) {
 			display.addDigit(input.getDigit());
 		} else {
 			display.addContent(input.getValue());
 		}
+	}
+
+	public void deleteOperand() {
+		operand = null;
+	}
+
+	public boolean isNewOperand() {
+		return operand == null;
 	}
 
 	@Override

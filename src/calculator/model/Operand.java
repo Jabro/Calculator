@@ -2,7 +2,7 @@ package calculator.model;
 
 public class Operand {
 
-	private final double number;
+	private double number;
 
 	public Operand(double number) {
 		this.number = number;
@@ -12,9 +12,15 @@ public class Operand {
 		return number;
 	}
 	
+	public void setNumber(double number) {
+		this.number = number;		
+	}
+	
 	@Override
 	public String toString() {
 		return String.valueOf(number);
 	}
+
+	
 
 }
