@@ -31,17 +31,19 @@ public class Calculator {
 	}
 
 	public double calculateResult() {
-		System.out.println("--------------");	
-		System.out.println(lastOperand);	
-		System.out.println("+");	
-		System.out.println(operand);	
 		if(operator == null) {
 			return lastOperand = operand;
 		}
 		double result = operator.getCalculationStrategy().calculate(lastOperand, operand);
-		lastOperand = result;
+		System.out.println("--------------");	
+		System.out.println(lastOperand);	
+		if(operator != null) {
+			System.out.println(operator.name());	
+		}
+		System.out.println(operand);	
 		System.out.println("= " + result);
 		System.out.println("--------------");	
+		lastOperand = result;
 		raiseResultChangedEvent(new ResultChangedEvent(this, result ));
 		return result;
 	}

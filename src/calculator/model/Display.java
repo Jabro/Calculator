@@ -21,8 +21,7 @@ public class Display {
 	}
 
 	public void addDigit(int digit) {
-		addContent(String.valueOf(digit));
-		System.out.println(content);		
+		addContent(String.valueOf(digit));		
 	}
 
 	private void setContent(String content) {

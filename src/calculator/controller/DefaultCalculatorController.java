@@ -43,7 +43,6 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	@Override
 	public void onCommandEntered(CommandEnteredEvent event) {
 		Command command = event.getCommand();
-		System.out.println(command.getName());
 		// +-*/=
 		if(command.isCalculationRequired()) {
 			// prevent overriding of the current operand
