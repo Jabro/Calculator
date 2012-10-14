@@ -23,7 +23,6 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	private final Collection<CalculatorView> views;
 	private final Display display;
 	private Double operand;
-	private boolean wasEqualSign = false;
 
 	public DefaultCalculatorController(Collection<CalculatorView> views) {
 		// models
@@ -63,15 +62,10 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 				calculator.setOperand(operand);		
 			}
 			deleteOperand();
-			if(!wasEqualSign) {
-				calculator.calculateResult();
-			} else {
-				wasEqualSign = false;
-			}
+			calculator.calculateResult();
 			if(command.hasOperator()) {
 				calculator.setOperator(command.getOperator());
 			} else {
-				wasEqualSign  = true;
 				System.out.println("Test");
 				calculator.setOperator(null);
 			}
