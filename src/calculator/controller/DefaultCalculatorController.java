@@ -23,6 +23,7 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	private final Collection<CalculatorView> views;
 	private final Display display;
 	private Double operand;
+	private boolean wasEqualSign = false;
 
 	public DefaultCalculatorController(Collection<CalculatorView> views) {
 		// models
@@ -49,6 +50,8 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 		configurateView(view);		
 	}
 
+	//TODO support clear
+	//TODO support square root
 	@Override
 	public void onCommandEntered(CommandEnteredEvent event) {
 		Command command = event.getCommand();
@@ -57,16 +60,23 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 			// prevent overriding of the current operand
 			// with the last result
 			if(!isNewOperand()) {
-				calculator.setOperand(operand);
+				calculator.setOperand(operand);		
 			}
-			calculator.calculateResult();
 			deleteOperand();
+			if(!wasEqualSign) {
+				calculator.calculateResult();
+			} else {
+				wasEqualSign = false;
+			}
+			if(command.hasOperator()) {
+				calculator.setOperator(command.getOperator());
+			} else {
+				wasEqualSign  = true;
+				System.out.println("Test");
+				calculator.setOperator(null);
+			}
 		}
-		//TODO support clear
-		//TODO support square root
-		if(command.hasOperator()) {
-			calculator.setOperator(command.getOperator());
-		}
+
 	}
 
 	@Override

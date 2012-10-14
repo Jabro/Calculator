@@ -44,6 +44,7 @@ public class Calculator {
 		System.out.println("= " + result);
 		System.out.println("--------------");	
 		lastOperand = result;
+		System.out.println(lastOperand);
 		raiseResultChangedEvent(new ResultChangedEvent(this, result ));
 		return result;
 	}

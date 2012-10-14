@@ -63,6 +63,20 @@ public class CalculatorControllerTest implements CalculationTestSupport {
 		mock.enterCommand(new Command("=", true));
 		mock.assertResult(1); // 3 + 4 - 6
 	}
+	
+	@Test
+	public void testPlusCalculateMinusThreeDigits() {
+		MockCalculatorView mock = createMock();
+		mock.enterDigit(FIRST_DIGIT);
+		mock.enterCommand(new Command("+", Operator.PLUS));
+		mock.enterDigit(SECOND_DIGIT);
+		mock.enterCommand(new Command("=", true));
+		mock.assertResult(7); // 3 + 4
+		mock.enterCommand(new Command("-", Operator.MINUS));
+		mock.enterDigit(THIRD_DIGIT);
+		mock.enterCommand(new Command("=", true));
+		mock.assertResult(1); // 7 - 6
+	}
 
 	private MockCalculatorView createMock() {
 		MockCalculatorView mock = new MockCalculatorView();
