@@ -14,6 +14,7 @@ import javax.swing.event.EventListenerList;
 import calculator.controller.Command;
 import calculator.controller.InputValue;
 import calculator.model.Display;
+import calculator.model.PocketCalculator;
 import calculator.view.buttons.ButtonBuilder;
 import calculator.view.buttons.ButtonListener;
 import calculator.view.buttons.CommandButtonBuilder;
@@ -29,14 +30,14 @@ public class PocketCalculatorView implements CalculatorView, ButtonListener{
 	private JTextField displayField;
 	private Collection<Command> commands;
 	private Collection<InputValue> inputValues;
-	private Display display;
+	private PocketCalculator pocketCalculator;
 
 	@Override
 	public void setModels(Collection<Command> commands,
-			Collection<InputValue> inputValues, Display display) {
+			Collection<InputValue> inputValues, PocketCalculator pocketCalculator) {
 				this.commands = commands;
 				this.inputValues = inputValues;
-				this.display = display;
+				this.pocketCalculator = pocketCalculator;
 	}
 	
 	@Override
@@ -44,7 +45,7 @@ public class PocketCalculatorView implements CalculatorView, ButtonListener{
 		JButton[] inputButtons = buildButtons(inputValues, new InputButtonBuilder());
 		JButton[] commandButtons = buildButtons(commands, new CommandButtonBuilder());
 				
-		createDisplayField(display);
+		createDisplayField(pocketCalculator.getDisplay());
 		JPanel panel = createPanel();
 		addButtons(panel, inputButtons);
 		addButtons(panel, commandButtons);

@@ -7,6 +7,7 @@ import java.util.Collection;
 import calculator.controller.Command;
 import calculator.controller.InputValue;
 import calculator.model.Display;
+import calculator.model.PocketCalculator;
 import calculator.view.CalculatorView;
 import calculator.view.events.CommandEnteredEvent;
 import calculator.view.events.CommandEventListener;
@@ -56,8 +57,8 @@ public class MockCalculatorView implements CalculatorView, CalculationTestSuppor
 
 	@Override
 	public void setModels(Collection<Command> commands,
-			Collection<InputValue> inputValues, Display display) {
-		this.content = display.getContent();
+			Collection<InputValue> inputValues, PocketCalculator pocketCalculator) {
+		this.content = pocketCalculator.getDisplay().getContent();
 	}
 
 	@Override

@@ -3,13 +3,10 @@ package calculator.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import calculator.model.Calculator;
-import calculator.model.Display;
 import calculator.model.Operator;
-import calculator.model.events.CalculatorEventListener;
+import calculator.model.PocketCalculator;
 import calculator.model.events.DisplayChangedEvent;
-import calculator.model.events.DisplayEventListener;
-import calculator.model.events.ResultChangedEvent;
+import calculator.model.events.PocketCalculatorEventListener;
 import calculator.view.CalculatorView;
 import calculator.view.events.CommandEnteredEvent;
 import calculator.view.events.CommandEventListener;
@@ -17,19 +14,15 @@ import calculator.view.events.InputEnteredEvent;
 import calculator.view.events.InputEventListener;
 
 public class PocketCalculatorController implements CalculatorController,
-CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventListener{
+CommandEventListener, InputEventListener, PocketCalculatorEventListener{
 
-	private final Calculator calculator;
 	private final Collection<CalculatorView> views;
-	private final Display display;
-	private Double operand;
+	private final PocketCalculator pocketCalculator;
 
 	public PocketCalculatorController(Collection<CalculatorView> views) {
-		// models
-		calculator = new Calculator();
-		calculator.addListener(this);
-		display = new Display();
-		display.addListener(this);
+		// model
+		pocketCalculator = new PocketCalculator();
+		pocketCalculator.addListener(this);		
 		// views
 		for (CalculatorView view : views) {
 			configurateView(view);
@@ -38,11 +31,9 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	}
 
 	public PocketCalculatorController(CalculatorView view) {
-		// models
-		calculator = new Calculator();
-		calculator.addListener(this);
-		display = new Display();
-		display.addListener(this);
+		// model
+		pocketCalculator = new PocketCalculator();
+		pocketCalculator.addListener(this);	
 		// views
 		views = new ArrayList<CalculatorView>();
 		views.add(view);
@@ -54,50 +45,22 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	@Override
 	public void onCommandEntered(CommandEnteredEvent event) {
 		Command command = event.getCommand();
-		// +-*/=
 		if(command.isCalculationRequired()) {
-			// prevent overriding of the current operand
-			// with the last result
-			if(!isNewOperand()) {
-				calculator.setOperand(operand);		
-			}
-			deleteOperand();
-			calculator.calculateResult();
 			if(command.hasOperator()) {
-				calculator.setOperator(command.getOperator());
+				// +-*/
+				pocketCalculator.setOperator(command.getOperator());			
 			} else {
-				System.out.println("Test");
-				calculator.setOperator(null);
+				// =
+				pocketCalculator.calculate();
 			}
 		}
-
 	}
+
 
 	@Override
 	public void onInputEntered(InputEnteredEvent event) {
 		InputValue input = event.getInput();
-		if(isNewOperand()){
-			display.clear();
-		}
-		if(input.isDigit()) {
-			display.addDigit(input.getDigit());
-		} else {
-			display.addContent(input.getValue());
-		}
-		operand = display.getNumber();
-	}
-
-	public void deleteOperand() {
-		operand = null;
-	}
-
-	public boolean isNewOperand() {
-		return operand == null;
-	}
-
-	@Override
-	public void onResultChanged(ResultChangedEvent event) {
-		display.setDisplay(event.getResult());
+		pocketCalculator.addInput(input.getValue());
 	}
 
 	@Override
@@ -110,7 +73,7 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 	private void configurateView(CalculatorView view) {
 		view.addCommandListener(this);
 		view.addInputListener(this);
-		view.setModels(createCommands(), createInputValues(), display);
+		view.setModels(createCommands(), createInputValues(), pocketCalculator);
 		view.initilize();
 	}
 
@@ -134,6 +97,5 @@ CommandEventListener, InputEventListener, CalculatorEventListener, DisplayEventL
 		inputValues.add(new InputValue("."));
 		return inputValues;
 	}
-
 
 }

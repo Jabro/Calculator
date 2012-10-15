@@ -5,6 +5,7 @@ import java.util.Collection;
 import calculator.controller.Command;
 import calculator.controller.InputValue;
 import calculator.model.Display;
+import calculator.model.PocketCalculator;
 import calculator.view.events.CommandEventListener;
 import calculator.view.events.InputEventListener;
 
@@ -21,7 +22,7 @@ public interface CalculatorView {
 	public void updateDisplay(Display display);
 
 	public void setModels(Collection<Command> commands,
-			Collection<InputValue> inputValues, Display display);
+			Collection<InputValue> inputValues, PocketCalculator pocketCalculator);
 
 	public void initilize();
 
