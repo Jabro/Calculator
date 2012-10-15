@@ -91,6 +91,9 @@ public class PocketCalculatorView implements CalculatorView, ButtonListener{
 
 	@Override
 	public void updateDisplay(Display display) {
+		if(display.isErrorMessage()) {
+			TextToSpeech.speak(display.getContent());
+		}
 		displayField.setText(display.getContent());
 	}
 

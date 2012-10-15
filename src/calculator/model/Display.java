@@ -7,10 +7,12 @@ import calculator.model.events.DisplayEventListener;
 
 public class Display {
 
+	private static final String YOU_DO_NOT_RESPECT_THE_WORKFLOW = "YOU DO NOT RESPECT THE WORKFLOW";
 	private static final String DEZIMAL_POINT = ".";
 	private static final String INITIAL_VALUE = "0";
 	private String content;
 	private EventListenerList listeners = new EventListenerList();
+	private boolean isErrorState = false;
 
 	public Display() {
 		clear();
@@ -30,6 +32,7 @@ public class Display {
 	}
 
 	public void addContent(String suffix) {
+		isErrorState = false;
 		if(isInitialDisplay() && !isDezimalPoint(suffix)) {
 			setContent(suffix);
 		} else {
@@ -50,6 +53,7 @@ public class Display {
 	}
 
 	public void setDisplay(Double number) {
+		isErrorState = false;
 		if(isInteger(number)) {
 			setContent(String.valueOf(number.intValue()));
 		} else {		
@@ -80,7 +84,12 @@ public class Display {
 	}
 
 	public void error() {
-		setContent("YOU DO NOT RESPECT THE WORKFLOW");
+		isErrorState = true;
+		setContent(YOU_DO_NOT_RESPECT_THE_WORKFLOW);		
+	}
+
+	public boolean isErrorMessage() {
+		return isErrorState ;
 	}
 
 }
