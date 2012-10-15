@@ -6,9 +6,18 @@ import calculator.model.events.ResultChangedEvent;
 
 public class PocketCalculator implements CalculatorEventListener {
 
+	private enum State {
+		CLEAR,
+		FIRST_OPERAND_STARTED,
+		OPERATOR_SET,
+		SECOND_OPERAND_STARTED;
+	}
+
 	private Calculator calculator;
 	private Display display;
-	private Double operand;
+	private double operand;
+	private double lastOperand;
+	private State state = State.CLEAR;
 
 	public PocketCalculator() {
 		calculator = new Calculator();
@@ -25,39 +34,69 @@ public class PocketCalculator implements CalculatorEventListener {
 	}
 
 	public void setOperator(Operator operator) {
-		calculate();		
-		calculator.setOperator(operator);
+		switch(state) {
+		case FIRST_OPERAND_STARTED:
+			calculator.setOperator(operator);
+			state = State.OPERATOR_SET;
+			lastOperand = operand;	
+			break;
+		case OPERATOR_SET:			
+			calculator.setOperator(operator);
+			break;
+		case SECOND_OPERAND_STARTED:		
+			calculate(false);
+			calculator.setOperator(operator);
+			state = State.OPERATOR_SET;
+			lastOperand = operand;	
+			break;
+		}
 	}
 
-	public void calculate() {
-		// prevent overriding of the current operand
-		// with the last result
-		if(!isNewOperand()) {
-			calculator.setOperand(operand);		
-		}
-		calculator.calculateResult();
-		deleteOperand();			
+	public void calculateFromEqualSign() {
+		calculate(true);
+	}
+
+	private void calculate(boolean fromEqualSign) {
+		switch(state) {
+		case CLEAR:
+		case FIRST_OPERAND_STARTED:
+		case OPERATOR_SET:
+			return;
+		case SECOND_OPERAND_STARTED:	
+			operand = calculator.calculateResult(lastOperand, operand);
+			deleteOperator();
+			if(fromEqualSign) {
+				state = State.FIRST_OPERAND_STARTED;
+			} else {
+				state = State.SECOND_OPERAND_STARTED;
+			}
+		}	
+
+	}
+
+	private void deleteOperator() {
 		calculator.setOperator(null);
 	}
 
-	public void deleteOperand() {
-		operand = null;
-	}
-
-	public boolean isNewOperand() {
-		return operand == null;
-	}
-
-	public void setOperand(double operand) {
-		this.operand = operand;		
-	}
-
 	public void addInput(String input) {
-		if(isNewOperand()){
+		if(state == State.CLEAR || state == State.OPERATOR_SET) {
 			display.clear();
 		}
 		display.addContent(input);
-		setOperand(display.getNumber());
+		switch(state) {
+		case CLEAR:
+		case FIRST_OPERAND_STARTED:
+			state = State.FIRST_OPERAND_STARTED;
+			break;
+		case OPERATOR_SET:
+			// lastOperand = operand;
+			state = State.SECOND_OPERAND_STARTED;
+			break;
+		case SECOND_OPERAND_STARTED:	
+			state = State.SECOND_OPERAND_STARTED;
+			break;
+		}		
+		operand = display.getNumber();
 	}
 
 	@Override
@@ -68,5 +107,5 @@ public class PocketCalculator implements CalculatorEventListener {
 	public Display getDisplay() {
 		return display;
 	}
-	
+
 }

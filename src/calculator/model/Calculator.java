@@ -9,8 +9,6 @@ public class Calculator {
 
 	private EventListenerList listeners = new EventListenerList();
 	private Operator operator;
-	private Double lastOperand = null;
-	private double operand     = 0;
 
 	public void addListener(CalculatorEventListener listener) {
 		listeners.add(CalculatorEventListener.class, listener);
@@ -27,18 +25,10 @@ public class Calculator {
 	}
 
 	public void setOperator(Operator operator) {
-		this.operator = operator;		
+		this.operator = operator;
 	}
 
-	public double calculateResult() {
-		// We have no pending calculations
-		if(operator == null) {
-			// Just one number entered
-			if(lastOperand == null) {
-				lastOperand = operand;
-			}
-			return lastOperand;
-		}
+	public double calculateResult(double lastOperand, double operand) {
 		double result = operator.getCalculationStrategy().calculate(lastOperand, operand);
 		System.out.println("--------------");	
 		System.out.println(lastOperand);	
@@ -52,10 +42,6 @@ public class Calculator {
 		System.out.println(lastOperand);
 		raiseResultChangedEvent(new ResultChangedEvent(this, result ));
 		return result;
-	}
-
-	public void setOperand(double operand) {
-		this.operand = operand;
 	}
 
 }

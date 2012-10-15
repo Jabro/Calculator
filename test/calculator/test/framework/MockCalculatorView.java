@@ -28,7 +28,7 @@ public class MockCalculatorView implements CalculatorView, CalculationTestSuppor
 		commandListener.onCommandEntered(new CommandEnteredEvent(this, command));
 	}
 
-	public void assertResult(double expected) {
+	public void assertDisplay(double expected) {
 		assertEquals(expected, (double)Double.valueOf(content), INACCURACY);
 	}
 

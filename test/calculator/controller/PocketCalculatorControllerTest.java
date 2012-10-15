@@ -1,6 +1,5 @@
 package calculator.controller;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import calculator.model.Operator;
@@ -18,7 +17,7 @@ public class PocketCalculatorControllerTest implements CalculationTestSupport {
 		MockCalculatorView mock = createMock();
 		mock.enterDigit(FIRST_DIGIT);
 		mock.enterDigit(SECOND_DIGIT);
-		mock.assertResult(34);
+		mock.assertDisplay(34);
 	}
 	
 	@Test
@@ -29,20 +28,21 @@ public class PocketCalculatorControllerTest implements CalculationTestSupport {
 		mock.enterCommand(new Command("+", Operator.PLUS));
 		mock.enterDigit(THIRD_DIGIT);
 		mock.enterCommand(new Command("=", true));
-		mock.assertResult(40); // 34 + 6
+		mock.assertDisplay(40); // 34 + 6
 	}
 	
 	@Test
 	public void testPlus() {
 		MockCalculatorView mock = createMock();
 		mock.enterDigit(FIRST_DIGIT);
+		mock.assertDisplay(3);
 		mock.enterCommand(new Command("+", Operator.PLUS));		
 		mock.enterDigit(SECOND_DIGIT);
+		mock.assertDisplay(4);
 		mock.enterCommand(new Command("=", true));
-		mock.assertResult(7); // 3 + 4
+		mock.assertDisplay(7); // 3 + 4
 	}
 	
-	@Ignore
 	@Test
 	public void testPlusPlus() {
 		MockCalculatorView mock = createMock();
@@ -51,22 +51,24 @@ public class PocketCalculatorControllerTest implements CalculationTestSupport {
 		mock.enterDigit(SECOND_DIGIT);
 		mock.enterCommand(new Command("+", Operator.PLUS));
 		mock.enterCommand(new Command("=", true));
-		mock.assertResult(7); // 3 + 4
+		mock.assertDisplay(7); // 3 + 4
 	}
 	
 	@Test
-	public void testPlusMinusTwoDigits() {
+	public void testPlusCalculateMinusCalculate() {
 		MockCalculatorView mock = createMock();
 		mock.enterDigit(FIRST_DIGIT);
 		mock.enterCommand(new Command("+", Operator.PLUS));
 		mock.enterDigit(SECOND_DIGIT);
-		mock.enterCommand(new Command("-", Operator.MINUS));
 		mock.enterCommand(new Command("=", true));
-		mock.assertResult(3); // 3 + 4 - 4
+		mock.enterCommand(new Command("-", Operator.MINUS));
+		mock.enterDigit(THIRD_DIGIT);
+		mock.enterCommand(new Command("=", true));
+		mock.assertDisplay(1); // 3 + 4 - 6
 	}
 	
 	@Test
-	public void testPlusMinusThreeDigits() {
+	public void testPlusMinusCalculate() {
 		MockCalculatorView mock = createMock();
 		mock.enterDigit(FIRST_DIGIT);
 		mock.enterCommand(new Command("+", Operator.PLUS));
@@ -74,7 +76,20 @@ public class PocketCalculatorControllerTest implements CalculationTestSupport {
 		mock.enterCommand(new Command("-", Operator.MINUS));
 		mock.enterDigit(THIRD_DIGIT);
 		mock.enterCommand(new Command("=", true));
-		mock.assertResult(1); // 3 + 4 - 6
+		mock.assertDisplay(1); // 3 + 4 - 6
+	}
+	
+	@Test
+	public void testMultiplicationCalculateDivisionCalculate() {
+		MockCalculatorView mock = createMock();
+		mock.enterDigit(FIRST_DIGIT);
+		mock.enterCommand(new Command("*", Operator.MULTIPLICATION));
+		mock.enterCommand(new Command("=", true));
+		mock.enterDigit(SECOND_DIGIT);
+		mock.enterCommand(new Command("/", Operator.DIVISION));
+		mock.enterDigit(THIRD_DIGIT);
+		mock.enterCommand(new Command("=", true));
+		mock.assertDisplay(2); // 3 * 4 / 6
 	}
 	
 	@Test
@@ -84,11 +99,11 @@ public class PocketCalculatorControllerTest implements CalculationTestSupport {
 		mock.enterCommand(new Command("+", Operator.PLUS));
 		mock.enterDigit(SECOND_DIGIT);
 		mock.enterCommand(new Command("=", true));
-		mock.assertResult(7); // 3 + 4
+		mock.assertDisplay(7); // 3 + 4
 		mock.enterCommand(new Command("-", Operator.MINUS));
 		mock.enterDigit(THIRD_DIGIT);
 		mock.enterCommand(new Command("=", true));
-		mock.assertResult(1); // 7 - 6
+		mock.assertDisplay(1); // 7 - 6
 	}
 
 	private MockCalculatorView createMock() {

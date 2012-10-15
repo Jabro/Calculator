@@ -51,7 +51,7 @@ CommandEventListener, InputEventListener, PocketCalculatorEventListener{
 				pocketCalculator.setOperator(command.getOperator());			
 			} else {
 				// =
-				pocketCalculator.calculate();
+				pocketCalculator.calculateFromEqualSign();
 			}
 		}
 	}
