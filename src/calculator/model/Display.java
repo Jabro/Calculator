@@ -79,4 +79,8 @@ public class Display {
 		return Double.valueOf(content);
 	}
 
+	public void error() {
+		setContent("YOU DO NOT RESPECT THE WORKFLOW");
+	}
+
 }

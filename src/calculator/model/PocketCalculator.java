@@ -10,7 +10,8 @@ public class PocketCalculator {
 		FIRST_OPERAND_FINISHED,
 		OPERATOR_SET,
 		SECOND_OPERAND_STARTED,
-		SECOND_OPERAND_FINISHED;
+		SECOND_OPERAND_FINISHED,
+		FINISHED;
 	}
 
 	private Display display;
@@ -34,6 +35,11 @@ public class PocketCalculator {
 	public void setOperator(Operator operator) {
 		switch(state) {
 		case CLEAR:
+			if(operator != Operator.MINUS) {
+				display.error();
+				return;
+			}
+		case FINISHED:
 		case FIRST_OPERAND_STARTED:
 		case FIRST_OPERAND_FINISHED:
 			if(operator == Operator.SQUARE_ROOT){
@@ -74,6 +80,7 @@ public class PocketCalculator {
 		case CLEAR:
 		case FIRST_OPERAND_STARTED:
 		case OPERATOR_SET:
+		case FINISHED:
 			return;
 		case SECOND_OPERAND_STARTED:
 		case SECOND_OPERAND_FINISHED:
@@ -81,7 +88,7 @@ public class PocketCalculator {
 			setResult(result);
 			deleteOperator();
 			if(fromEqualSign) {
-				state = State.CLEAR;
+				state = State.FINISHED;
 			} else {
 				state = State.SECOND_OPERAND_STARTED;
 			}
@@ -104,6 +111,7 @@ public class PocketCalculator {
 		case OPERATOR_SET:
 		case FIRST_OPERAND_FINISHED:
 		case SECOND_OPERAND_FINISHED:
+		case FINISHED:
 			display.clear();
 		}
 		display.addContent(input);
@@ -112,6 +120,7 @@ public class PocketCalculator {
 		case FIRST_OPERAND_FINISHED:
 		case FIRST_OPERAND_STARTED:
 		case SECOND_OPERAND_FINISHED:
+		case FINISHED:
 			state = State.FIRST_OPERAND_STARTED;
 			break;
 		case OPERATOR_SET:
