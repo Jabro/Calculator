@@ -20,8 +20,8 @@ public class Command {
 		this.operator = null;
 	}
 	
-	public Command(String name, Operator operator) {
-		this.name = name;
+	public Command(Operator operator) {
+		this.name = operator.getSign();
 		this.isCalculationRequired = true;
 		this.operator = operator;
 	}

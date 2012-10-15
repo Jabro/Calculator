@@ -74,10 +74,10 @@ public class PocketCalculatorController implements CalculatorController{
 
 	private Collection<Command> createCommands() {
 		final Collection<Command> commands = new ArrayList<Command>();
-		commands.add(new Command("+", Operator.PLUS));
-		commands.add(new Command("-", Operator.MINUS));
-		commands.add(new Command("*", Operator.MULTIPLICATION));
-		commands.add(new Command("/", Operator.DIVISION));
+		commands.add(new Command(Operator.PLUS));
+		commands.add(new Command(Operator.MINUS));
+		commands.add(new Command(Operator.MULTIPLICATION));
+		commands.add(new Command(Operator.DIVISION));
 		commands.add(new Command("=", true));
 		commands.add(new Command("C"));
 		commands.add(new Command("sqrt"));
