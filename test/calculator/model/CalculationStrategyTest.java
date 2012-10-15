@@ -4,32 +4,43 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import calculator.model.calculation.strategies.CalculationStrategy;
 import calculator.model.calculation.strategies.DivisionCalculationStrategy;
 import calculator.model.calculation.strategies.MinusCalculationStrategy;
 import calculator.model.calculation.strategies.MultiplicationCalculationStrategy;
 import calculator.model.calculation.strategies.PlusCalculationStrategy;
+import calculator.model.calculation.strategies.SquareRootCalculationStrategy;
 import calculator.test.framework.CalculationTestSupport;
 
 public class CalculationStrategyTest implements CalculationTestSupport {
 	
 	@Test
 	public void testPlus() {
-		assertEquals(7, new PlusCalculationStrategy().calculate(3, 4), INACCURACY);
+		assertCalculation(7, new PlusCalculationStrategy());
 	}
-	
+
 	@Test
 	public void testMinus() {
-		assertEquals(-1, new MinusCalculationStrategy().calculate(3, 4), INACCURACY);
+		assertCalculation(-1, new MinusCalculationStrategy());
 	}
 	
 	@Test
 	public void testMultiplication() {
-		assertEquals(12, new MultiplicationCalculationStrategy().calculate(3, 4), INACCURACY);
+		assertCalculation(12, new MultiplicationCalculationStrategy());
 	}
 	
 	@Test
 	public void testDivision() {
-		assertEquals(.75, new DivisionCalculationStrategy().calculate(3, 4), INACCURACY);
+		assertCalculation(.75, new DivisionCalculationStrategy());
+	}
+	
+	@Test
+	public void testSquareRoot() {
+		assertEquals(3, new SquareRootCalculationStrategy().calculate(9), INACCURACY);
+	}
+
+	private void assertCalculation(double expected, CalculationStrategy calculationStrategy) {
+		assertEquals(expected, calculationStrategy.calculate(FIRST_OPERAND, SECOND_OPERAND), INACCURACY);
 	}
 
 }
