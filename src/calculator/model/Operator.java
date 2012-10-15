@@ -3,11 +3,12 @@ package calculator.model;
 import calculator.model.calculation.strategies.*;
 
 public enum Operator {
+	
 	PLUS("+", new PlusCalculationStrategy()),
 	MINUS("-", new MinusCalculationStrategy()), 
 	MULTIPLICATION("*", new MultiplicationCalculationStrategy()),
-	DIVISION("/", new DivisionCalculationStrategy());
-	
+	DIVISION("/", new DivisionCalculationStrategy()),
+	SQUARE_ROOT("sqrt", new SquareRootCalculationStrategy());
 	
 	private final CalculationStrategy calculationStrategy;
 	private final String sign;

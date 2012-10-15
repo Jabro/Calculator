@@ -7,7 +7,7 @@ public class Calculation {
 	private static final String EQUALS = SEPERATOR + "=" + SEPERATOR;
 
 	private final double firstOperand;
-	private final double secondOperand;
+	private final Double secondOperand;
 	private final Operator operator;
 	private Double result;
 
@@ -17,8 +17,18 @@ public class Calculation {
 		this.secondOperand = secondOperand;		
 	}
 
+	public Calculation(Operator operator, double operand) {
+		this.operator = operator;
+		this.firstOperand = operand;
+		this.secondOperand = null;
+	}
+
 	public static double calculateResult(double firstOperand, Operator operator, double secondOperand) {
 		return new Calculation(firstOperand, operator, secondOperand).calculate();	
+	}
+
+	public static Double calculateResult(Operator operator, double operand) {
+		return new Calculation(operator, operand).calculate();	
 	}
 
 	public double calculate() {
@@ -30,11 +40,17 @@ public class Calculation {
 	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(firstOperand);
-		buffer.append(SEPERATOR);
+		if(secondOperand != null) {
+			buffer.append(firstOperand);
+			buffer.append(SEPERATOR);
+		}
 		buffer.append(operator);
 		buffer.append(SEPERATOR);
-		buffer.append(secondOperand);
+		if(secondOperand != null) {			
+			buffer.append(secondOperand);
+		} else {
+			buffer.append(firstOperand);
+		}
 		if(result != null) {	
 			buffer.append(EQUALS);
 			buffer.append(result);

@@ -7,8 +7,10 @@ public class PocketCalculator {
 	private enum State {
 		CLEAR,
 		FIRST_OPERAND_STARTED,
+		FIRST_OPERAND_FINISHED,
 		OPERATOR_SET,
-		SECOND_OPERAND_STARTED;
+		SECOND_OPERAND_STARTED,
+		SECOND_OPERAND_FINISHED;
 	}
 
 	private Display display;
@@ -16,7 +18,7 @@ public class PocketCalculator {
 	private double lastOperand;
 	private State state = State.CLEAR;
 	private Operator operator;
-	
+
 	public PocketCalculator() {
 		display = new Display();
 	}
@@ -32,6 +34,13 @@ public class PocketCalculator {
 	public void setOperator(Operator operator) {
 		switch(state) {
 		case FIRST_OPERAND_STARTED:
+		case FIRST_OPERAND_FINISHED:
+			if(operator == Operator.SQUARE_ROOT){
+				Double result = Calculation.calculateResult(operator, operand);
+				setResult(result);
+				state  = State.FIRST_OPERAND_FINISHED;
+				return;
+			}
 			this.operator = operator;
 			state = State.OPERATOR_SET;
 			lastOperand = operand;	
@@ -39,7 +48,14 @@ public class PocketCalculator {
 		case OPERATOR_SET:			
 			this.operator = operator;
 			break;
-		case SECOND_OPERAND_STARTED:		
+		case SECOND_OPERAND_STARTED:
+		case SECOND_OPERAND_FINISHED:
+			if(operator == Operator.SQUARE_ROOT){
+				Double result = Calculation.calculateResult(operator, operand);
+				setResult(result);
+				state  = State.SECOND_OPERAND_FINISHED;
+				return;
+			}
 			calculate(false);
 			this.operator = operator;
 			state = State.OPERATOR_SET;
@@ -58,10 +74,10 @@ public class PocketCalculator {
 		case FIRST_OPERAND_STARTED:
 		case OPERATOR_SET:
 			return;
-		case SECOND_OPERAND_STARTED:	
+		case SECOND_OPERAND_STARTED:
+		case SECOND_OPERAND_FINISHED:
 			Double result = Calculation.calculateResult(lastOperand, operator, operand);
-			display.setDisplay(result);
-			operand = result;
+			setResult(result);
 			deleteOperator();
 			if(fromEqualSign) {
 				state = State.FIRST_OPERAND_STARTED;
@@ -72,24 +88,35 @@ public class PocketCalculator {
 
 	}
 
+	private void setResult(Double result) {
+		display.setDisplay(result);
+		operand = result;
+	}
+
 	private void deleteOperator() {
 		operator = null;
 	}
 
 	public void addInput(String input) {
-		if(state == State.CLEAR || state == State.OPERATOR_SET) {
+		switch(state) {
+		case CLEAR:
+		case OPERATOR_SET:
+		case FIRST_OPERAND_FINISHED:
+		case SECOND_OPERAND_FINISHED:
 			display.clear();
 		}
 		display.addContent(input);
 		switch(state) {
 		case CLEAR:
+		case FIRST_OPERAND_FINISHED:
 		case FIRST_OPERAND_STARTED:
+		case SECOND_OPERAND_FINISHED:
 			state = State.FIRST_OPERAND_STARTED;
 			break;
 		case OPERATOR_SET:
 			state = State.SECOND_OPERAND_STARTED;
 			break;
-		case SECOND_OPERAND_STARTED:	
+		case SECOND_OPERAND_STARTED:		
 			state = State.SECOND_OPERAND_STARTED;
 			break;
 		}		

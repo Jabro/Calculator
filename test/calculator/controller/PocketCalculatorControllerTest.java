@@ -21,17 +21,6 @@ public class PocketCalculatorControllerTest implements CalculationTestSupport {
 	}
 	
 	@Test
-	public void testPlusTwoDigits() {
-		MockCalculatorView mock = createMock();
-		mock.enterDigit(FIRST_DIGIT);
-		mock.enterDigit(SECOND_DIGIT);
-		mock.enterCommand(new Command(Operator.PLUS));
-		mock.enterDigit(THIRD_DIGIT);
-		mock.enterCommand(new Command("=", true));
-		mock.assertDisplay(40); // 34 + 6
-	}
-	
-	@Test
 	public void testPlus() {
 		MockCalculatorView mock = createMock();
 		mock.enterDigit(FIRST_DIGIT);
@@ -41,6 +30,17 @@ public class PocketCalculatorControllerTest implements CalculationTestSupport {
 		mock.assertDisplay(4);
 		mock.enterCommand(new Command("=", true));
 		mock.assertDisplay(7); // 3 + 4
+	}
+	
+	@Test
+	public void testPlusTwoDigits() {
+		MockCalculatorView mock = createMock();
+		mock.enterDigit(FIRST_DIGIT);
+		mock.enterDigit(SECOND_DIGIT);
+		mock.enterCommand(new Command(Operator.PLUS));
+		mock.enterDigit(THIRD_DIGIT);
+		mock.enterCommand(new Command("=", true));
+		mock.assertDisplay(40); // 34 + 6
 	}
 	
 	@Test
@@ -77,6 +77,95 @@ public class PocketCalculatorControllerTest implements CalculationTestSupport {
 		mock.enterDigit(THIRD_DIGIT);
 		mock.enterCommand(new Command("=", true));
 		mock.assertDisplay(1); // 3 + 4 - 6
+	}
+	
+	@Test
+	public void testPlusSquareRootCalculate() {
+		MockCalculatorView mock = createMock();
+		mock.enterDigit(FIRST_DIGIT);
+		mock.assertDisplay(3);
+		mock.enterCommand(new Command(Operator.PLUS));
+		mock.enterDigit(SECOND_DIGIT);
+		mock.enterCommand(new Command(Operator.SQUARE_ROOT));
+		mock.assertDisplay(2); // sqrt(4)
+		mock.enterCommand(new Command("=", true));
+		mock.assertDisplay(5); // 3 + sqrt(4)
+	}
+	
+	@Test
+	public void testPlusSquareRootCalculatePlusSquareRootCalculate() {
+		MockCalculatorView mock = createMock();
+		mock.enterDigit(FIRST_DIGIT);
+		mock.enterCommand(new Command(Operator.PLUS));
+		mock.enterDigit(THIRD_DIGIT);
+		mock.enterCommand(new Command("=", true));
+		mock.assertDisplay(9); // 3 + 6
+		mock.enterCommand(new Command(Operator.SQUARE_ROOT));
+		mock.assertDisplay(3); // sqrt(9)
+		mock.enterCommand(new Command(Operator.PLUS));
+		mock.enterDigit(SECOND_DIGIT);
+		mock.enterCommand(new Command(Operator.SQUARE_ROOT));
+		mock.assertDisplay(2); // sqrt(4)
+		mock.enterCommand(new Command("=", true));
+		mock.assertDisplay(5); // 3 + 2
+	}
+	
+	@Test
+	public void testOverideSquareRootResult() {
+		MockCalculatorView mock = createMock();
+		mock.enterDigit(FIRST_DIGIT);
+		mock.assertDisplay(FIRST_DIGIT);
+		mock.enterCommand(new Command(Operator.SQUARE_ROOT));
+		mock.enterDigit(SECOND_DIGIT);
+		mock.assertDisplay(SECOND_DIGIT);
+	}
+	
+	@Test
+	public void testOverideSquareRootResultAndCalulate() {
+		MockCalculatorView mock = createMock();
+		mock.enterDigit(FIRST_DIGIT);
+		mock.assertDisplay(3);
+		mock.enterCommand(new Command(Operator.SQUARE_ROOT));
+		mock.enterDigit(SECOND_DIGIT);
+		mock.assertDisplay(4);
+		mock.enterCommand(new Command(Operator.PLUS));
+		mock.enterDigit(THIRD_DIGIT);
+		mock.enterCommand(new Command("=", true));
+		mock.assertDisplay(10); // 4 + 6
+	}
+	
+	@Test
+	public void testCalulateAndOverideSquareRootResult() {
+		MockCalculatorView mock = createMock();
+		mock.enterDigit(FIRST_DIGIT);
+		mock.assertDisplay(3);
+		mock.enterCommand(new Command(Operator.PLUS));
+		mock.enterDigit(SECOND_DIGIT);
+		mock.assertDisplay(4);
+		mock.enterCommand(new Command(Operator.SQUARE_ROOT));
+		mock.assertDisplay(2);
+		mock.enterDigit(THIRD_DIGIT);
+		mock.assertDisplay(6);
+	}
+	
+	@Test
+	public void testCalulateAndOverideSquareRootResultAndCalculate() {
+		MockCalculatorView mock = createMock();
+		mock.enterDigit(FIRST_DIGIT);
+		mock.assertDisplay(3);
+		mock.enterCommand(new Command(Operator.PLUS));
+		mock.enterDigit(SECOND_DIGIT);
+		mock.assertDisplay(4);
+		mock.enterCommand(new Command(Operator.SQUARE_ROOT));
+		mock.assertDisplay(2);
+		mock.enterDigit(THIRD_DIGIT);
+		mock.assertDisplay(6);
+		mock.enterCommand(new Command(Operator.PLUS));
+		mock.enterDigit(SECOND_DIGIT);
+		mock.assertDisplay(4);
+		mock.enterCommand(new Command("=", true));
+		mock.assertDisplay(10); // 6 + 4
+		
 	}
 	
 	@Test

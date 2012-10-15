@@ -1,6 +1,6 @@
 package calculator.model.calculation.strategies;
 
-public class MultiplicationCalculationStrategy implements CalculationStrategy {
+public class MultiplicationCalculationStrategy extends BinaryCalculationStrategy {
 
 	@Override
 	public double calculate(double firstOperand, double secondOperand) {

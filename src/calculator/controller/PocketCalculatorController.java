@@ -80,7 +80,7 @@ public class PocketCalculatorController implements CalculatorController{
 		commands.add(new Command(Operator.DIVISION));
 		commands.add(new Command("=", true));
 		commands.add(new Command("C"));
-		commands.add(new Command("sqrt"));
+		commands.add(new Command(Operator.SQUARE_ROOT));
 		return commands;
 	}
 
