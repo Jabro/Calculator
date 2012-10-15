@@ -1,7 +1,7 @@
 package calculator.model;
 
 import calculator.model.events.CalculatorEventListener;
-import calculator.model.events.PocketCalculatorEventListener;
+import calculator.model.events.DisplayEventListener;
 import calculator.model.events.ResultChangedEvent;
 
 public class PocketCalculator implements CalculatorEventListener {
@@ -25,11 +25,11 @@ public class PocketCalculator implements CalculatorEventListener {
 		display    = new Display();
 	}
 
-	public void addListener(PocketCalculatorEventListener listener) {
+	public void addListener(DisplayEventListener listener) {
 		display.addListener(listener);		
 	}
 
-	public void removeListener(PocketCalculatorEventListener listener) {
+	public void removeListener(DisplayEventListener listener) {
 		display.removeListener(listener);		
 	}
 

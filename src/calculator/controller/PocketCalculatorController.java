@@ -6,15 +6,11 @@ import java.util.Collection;
 import calculator.model.Operator;
 import calculator.model.PocketCalculator;
 import calculator.model.events.DisplayChangedEvent;
-import calculator.model.events.PocketCalculatorEventListener;
 import calculator.view.CalculatorView;
 import calculator.view.events.CommandEnteredEvent;
-import calculator.view.events.CommandEventListener;
 import calculator.view.events.InputEnteredEvent;
-import calculator.view.events.InputEventListener;
 
-public class PocketCalculatorController implements CalculatorController,
-CommandEventListener, InputEventListener, PocketCalculatorEventListener{
+public class PocketCalculatorController implements CalculatorController{
 
 	private final Collection<CalculatorView> views;
 	private final PocketCalculator pocketCalculator;
@@ -55,7 +51,6 @@ CommandEventListener, InputEventListener, PocketCalculatorEventListener{
 			}
 		}
 	}
-
 
 	@Override
 	public void onInputEntered(InputEnteredEvent event) {
