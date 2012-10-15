@@ -1,10 +1,8 @@
 package calculator.model;
 
-import calculator.model.events.CalculatorEventListener;
 import calculator.model.events.DisplayEventListener;
-import calculator.model.events.ResultChangedEvent;
 
-public class PocketCalculator implements CalculatorEventListener {
+public class PocketCalculator {
 
 	private enum State {
 		CLEAR,
@@ -13,16 +11,14 @@ public class PocketCalculator implements CalculatorEventListener {
 		SECOND_OPERAND_STARTED;
 	}
 
-	private Calculator calculator;
 	private Display display;
 	private double operand;
 	private double lastOperand;
 	private State state = State.CLEAR;
-
+	private Operator operator;
+	
 	public PocketCalculator() {
-		calculator = new Calculator();
-		calculator.addListener(this);
-		display    = new Display();
+		display = new Display();
 	}
 
 	public void addListener(DisplayEventListener listener) {
@@ -36,16 +32,16 @@ public class PocketCalculator implements CalculatorEventListener {
 	public void setOperator(Operator operator) {
 		switch(state) {
 		case FIRST_OPERAND_STARTED:
-			calculator.setOperator(operator);
+			this.operator = operator;
 			state = State.OPERATOR_SET;
 			lastOperand = operand;	
 			break;
 		case OPERATOR_SET:			
-			calculator.setOperator(operator);
+			this.operator = operator;
 			break;
 		case SECOND_OPERAND_STARTED:		
 			calculate(false);
-			calculator.setOperator(operator);
+			this.operator = operator;
 			state = State.OPERATOR_SET;
 			lastOperand = operand;	
 			break;
@@ -63,7 +59,9 @@ public class PocketCalculator implements CalculatorEventListener {
 		case OPERATOR_SET:
 			return;
 		case SECOND_OPERAND_STARTED:	
-			operand = calculator.calculateResult(lastOperand, operand);
+			Double result = Calculation.calculateResult(lastOperand, operator, operand);
+			display.setDisplay(result);
+			operand = result;
 			deleteOperator();
 			if(fromEqualSign) {
 				state = State.FIRST_OPERAND_STARTED;
@@ -75,7 +73,7 @@ public class PocketCalculator implements CalculatorEventListener {
 	}
 
 	private void deleteOperator() {
-		calculator.setOperator(null);
+		operator = null;
 	}
 
 	public void addInput(String input) {
@@ -89,7 +87,6 @@ public class PocketCalculator implements CalculatorEventListener {
 			state = State.FIRST_OPERAND_STARTED;
 			break;
 		case OPERATOR_SET:
-			// lastOperand = operand;
 			state = State.SECOND_OPERAND_STARTED;
 			break;
 		case SECOND_OPERAND_STARTED:	
@@ -97,11 +94,6 @@ public class PocketCalculator implements CalculatorEventListener {
 			break;
 		}		
 		operand = display.getNumber();
-	}
-
-	@Override
-	public void onResultChanged(ResultChangedEvent event) {
-		display.setDisplay(event.getResult());
 	}
 
 	public Display getDisplay() {

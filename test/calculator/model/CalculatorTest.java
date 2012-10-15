@@ -10,37 +10,31 @@ public class CalculatorTest implements CalculationTestSupport {
 
 	@Test
 	public void testPlus() {
-		Calculator calculator = testSingle(Operator.PLUS);
-		assertResult(calculator, FIRST_OPERAND + SECOND_OPERAND);
+		assertResult(FIRST_OPERAND + SECOND_OPERAND, test(Operator.PLUS));
 	}
 
 	@Test
 	public void testMinus() {
-		Calculator calculator = testSingle(Operator.MINUS);
-		assertResult(calculator, FIRST_OPERAND - SECOND_OPERAND);
+		assertResult(FIRST_OPERAND - SECOND_OPERAND, test(Operator.MINUS));
 	}
 
 	@Test
 	public void testMultiplication() {
-		Calculator calculator = testSingle(Operator.MULTIPLICATION);
-		assertResult(calculator, FIRST_OPERAND * SECOND_OPERAND);
+		assertResult(FIRST_OPERAND * SECOND_OPERAND, test(Operator.MULTIPLICATION));
 	}
 
 	@Test
 	public void testDivision() {
-		Calculator calculator = testSingle(Operator.DIVISION);
-		assertResult(calculator, FIRST_OPERAND / SECOND_OPERAND);
+		assertResult(FIRST_OPERAND / SECOND_OPERAND, test(Operator.DIVISION));
 	}
 
-	private void assertResult(Calculator calculator, Double expected) {
-		assertEquals(expected , calculator.calculateResult(FIRST_OPERAND, SECOND_OPERAND), INACCURACY);
+	private void assertResult(double expected, double result) {
+		assertEquals(expected, result, INACCURACY);
 	}
 
-
-	private Calculator testSingle(Operator operator) {
-		Calculator calculator = new Calculator();
-		calculator.setOperator(operator);
-		return calculator;
+	private double test(Operator operator) {
+		Calculation calculation = new Calculation(FIRST_OPERAND, operator, SECOND_OPERAND);
+		return calculation.calculate();
 	}
 
 }
