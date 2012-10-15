@@ -28,20 +28,21 @@ public class Calculator {
 		this.operator = operator;
 	}
 
-	public double calculateResult(double lastOperand, double operand) {
-		double result = operator.getCalculationStrategy().calculate(lastOperand, operand);
-		System.out.println("--------------");	
-		System.out.println(lastOperand);	
-		if(operator != null) {
-			System.out.println(operator.name());	
-		}
-		System.out.println(operand);	
-		System.out.println("= " + result);
-		System.out.println("--------------");	
-		lastOperand = result;
-		System.out.println(lastOperand);
+	public double calculateResult(double firstOperand, double secondOperand) {
+		double result = operator.getCalculationStrategy().calculate(firstOperand, secondOperand);
+		printCalculation(firstOperand, secondOperand, result);	
 		raiseResultChangedEvent(new ResultChangedEvent(this, result ));
 		return result;
+	}
+
+	private void printCalculation(double firstOperand, double secondOperand,
+			double result) {
+		System.out.println("--------------");	
+		System.out.println(firstOperand);	
+		System.out.println(operator.name());	
+		System.out.println(secondOperand);	
+		System.out.println("= " + result);
+		System.out.println("--------------");
 	}
 
 }
