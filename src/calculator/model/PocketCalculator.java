@@ -33,6 +33,7 @@ public class PocketCalculator {
 
 	public void setOperator(Operator operator) {
 		switch(state) {
+		case CLEAR:
 		case FIRST_OPERAND_STARTED:
 		case FIRST_OPERAND_FINISHED:
 			if(operator == Operator.SQUARE_ROOT){
@@ -80,7 +81,7 @@ public class PocketCalculator {
 			setResult(result);
 			deleteOperator();
 			if(fromEqualSign) {
-				state = State.FIRST_OPERAND_STARTED;
+				state = State.CLEAR;
 			} else {
 				state = State.SECOND_OPERAND_STARTED;
 			}
@@ -125,6 +126,12 @@ public class PocketCalculator {
 
 	public Display getDisplay() {
 		return display;
+	}
+
+	public void executeClear() {
+		lastOperand = operand = 0;
+		state = State.CLEAR;
+		display.clear();
 	}
 
 }

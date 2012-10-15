@@ -3,6 +3,7 @@ package calculator.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import calculator.controller.Command.Type;
 import calculator.model.Operator;
 import calculator.model.PocketCalculator;
 import calculator.model.events.DisplayChangedEvent;
@@ -36,19 +37,19 @@ public class PocketCalculatorController implements CalculatorController{
 		configurateView(view);		
 	}
 
-	//TODO support clear
-	//TODO support square root
 	@Override
 	public void onCommandEntered(CommandEnteredEvent event) {
 		Command command = event.getCommand();
-		if(command.isCalculationRequired()) {
-			if(command.hasOperator()) {
-				// +-*/
-				pocketCalculator.setOperator(command.getOperator());			
-			} else {
-				// =
-				pocketCalculator.calculateFromEqualSign();
-			}
+		switch(command.getType()) {
+		case OPERATOR:
+			pocketCalculator.setOperator(command.getOperator());			
+			break;
+		case CALCULATION:
+			pocketCalculator.calculateFromEqualSign();
+			break;
+		case CLEAR:
+			pocketCalculator.executeClear();
+			break;
 		}
 	}
 
@@ -78,8 +79,8 @@ public class PocketCalculatorController implements CalculatorController{
 		commands.add(new Command(Operator.MINUS));
 		commands.add(new Command(Operator.MULTIPLICATION));
 		commands.add(new Command(Operator.DIVISION));
-		commands.add(new Command("=", true));
-		commands.add(new Command("C"));
+		commands.add(new Command("=", Type.CALCULATION));
+		commands.add(new Command("C", Type.CLEAR));
 		commands.add(new Command(Operator.SQUARE_ROOT));
 		return commands;
 	}
