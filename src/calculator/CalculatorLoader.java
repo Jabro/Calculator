@@ -14,11 +14,11 @@ public class CalculatorLoader {
 		//startPocketCalculatorWithTwoViews()
 	}
 
-	private static void startPocketCalculator() {
+	public static void startPocketCalculator() {
 		new PocketCalculatorController(new PocketCalculatorView());
 	}
 
-	private static void startPocketCalculatorWithTwoViews() {
+	public static void startPocketCalculatorWithTwoViews() {
 		// views
 		Collection<CalculatorView> views = new ArrayList<CalculatorView>();
 		views.add(new PocketCalculatorView());
