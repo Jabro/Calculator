@@ -19,6 +19,7 @@ public class Display {
 	}
 
 	public void clear() {
+		isErrorState = false;
 		setContent(INITIAL_VALUE);
 	}
 
