@@ -16,27 +16,27 @@ public class CalculationStrategyTest implements CalculationTestSupport {
 	
 	@Test
 	public void testPlus() {
-		assertCalculation(7, new PlusCalculationStrategy());
+		assertCalculation(7, PlusCalculationStrategy.getInstance());
 	}
 
 	@Test
 	public void testMinus() {
-		assertCalculation(-1, new MinusCalculationStrategy());
+		assertCalculation(-1, MinusCalculationStrategy.getInstance());
 	}
 	
 	@Test
 	public void testMultiplication() {
-		assertCalculation(12, new MultiplicationCalculationStrategy());
+		assertCalculation(12, MultiplicationCalculationStrategy.getInstance());
 	}
 	
 	@Test
 	public void testDivision() {
-		assertCalculation(.75, new DivisionCalculationStrategy());
+		assertCalculation(.75, DivisionCalculationStrategy.getInstance());
 	}
 	
 	@Test
 	public void testSquareRoot() {
-		assertEquals(3, new SquareRootCalculationStrategy().calculate(9), INACCURACY);
+		assertEquals(3, SquareRootCalculationStrategy.getInstance().calculate(9), INACCURACY);
 	}
 
 	private void assertCalculation(double expected, CalculationStrategy calculationStrategy) {

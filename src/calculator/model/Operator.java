@@ -4,11 +4,11 @@ import calculator.model.calculation.strategies.*;
 
 public enum Operator {
 	
-	PLUS("+", new PlusCalculationStrategy()),
-	MINUS("-", new MinusCalculationStrategy()), 
-	MULTIPLICATION("*", new MultiplicationCalculationStrategy()),
-	DIVISION("/", new DivisionCalculationStrategy()),
-	SQUARE_ROOT("sqrt", new SquareRootCalculationStrategy());
+	PLUS("+", PlusCalculationStrategy.getInstance()),
+	MINUS("-", MinusCalculationStrategy.getInstance()), 
+	MULTIPLICATION("*", MultiplicationCalculationStrategy.getInstance()),
+	DIVISION("/", DivisionCalculationStrategy.getInstance()),
+	SQUARE_ROOT("sqrt", SquareRootCalculationStrategy.getInstance());
 	
 	private final CalculationStrategy calculationStrategy;
 	private final String sign;
