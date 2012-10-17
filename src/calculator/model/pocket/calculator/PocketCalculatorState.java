@@ -1,6 +1,7 @@
 package calculator.model.pocket.calculator;
 
 import calculator.model.Calculation;
+import calculator.model.Display;
 import calculator.model.Operator;
 
 public abstract class PocketCalculatorState {
@@ -24,17 +25,24 @@ public abstract class PocketCalculatorState {
 
 	}
 
-	protected abstract void useOperator(PocketCalculatorStateSupport calculator, Operator operator);
+	protected void useOperator(PocketCalculatorStateSupport calculator, Operator operator) {
+		calculator.setOperator(operator);
+		calculator.setLastOperand(calculator.getOperand());	
+	}
 
-	protected abstract void useInput(PocketCalculatorStateSupport calculator, String input);
+	protected void useInput(PocketCalculatorStateSupport calculator, String input) {
+		Display display = calculator.getDisplay();
+		display.addContent(input);
+		calculator.setOperand(display.getNumber());
+	}
 
 	protected void calculate(PocketCalculatorStateSupport calculator, boolean fromEqualSign) {
 	}
-	
+
 	protected void calculateSquareRoot(PocketCalculatorStateSupport calculator, Operator operator) {
 		Double result = Calculation.calculateResult(operator, calculator.getOperand());
 		calculator.getDisplay().setNumber(result);
 		calculator.setOperand(result);
 	}
-	
+
 }

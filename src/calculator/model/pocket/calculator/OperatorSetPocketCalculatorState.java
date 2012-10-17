@@ -1,6 +1,5 @@
 package calculator.model.pocket.calculator;
 
-import calculator.model.Display;
 import calculator.model.Operator;
 
 public class OperatorSetPocketCalculatorState extends PocketCalculatorState {
@@ -24,11 +23,9 @@ public class OperatorSetPocketCalculatorState extends PocketCalculatorState {
 
 	@Override
 	protected void useInput(PocketCalculatorStateSupport calculator, String input) {
-		Display display = calculator.getDisplay();
-		display.clear();
-		display.addContent(input);
+		calculator.getDisplay().clear();
 		calculator.setState(States.SECOND_OPERAND, false);
-		calculator.setOperand(display.getNumber());
+		super.useInput(calculator, input);
 	}
 
 }

@@ -1,7 +1,6 @@
 package calculator.model.pocket.calculator;
 
 import calculator.model.Calculation;
-import calculator.model.Display;
 import calculator.model.Operator;
 
 public class SecondOperandPocketCalculatorState extends PocketCalculatorState {
@@ -26,24 +25,19 @@ public class SecondOperandPocketCalculatorState extends PocketCalculatorState {
 			return;
 		}
 		calculate(calculator, false);
-		calculator.setOperator(operator);
 		calculator.setState(States.OPERATOR_SET);
-		calculator.setLastOperand(calculator.getOperand());
+		super.useOperator(calculator, operator);
 	}
 
 	@Override
 	protected void useInput(PocketCalculatorStateSupport calculator, String input) {
-		Display display = calculator.getDisplay();
 		if(calculator.isOperandFinished()) {
-			display.clear();
-		}		
-		display.addContent(input);
-		if(calculator.isOperandFinished()) {
+			calculator.getDisplay().clear();
 			calculator.setState(States.FIRST_OPERAND, false);
 		} else {
 			calculator.setState(States.SECOND_OPERAND, false);
-		}				
-		calculator.setOperand(display.getNumber());
+		}		
+		super.useInput(calculator, input);
 	}
 
 	@Override
