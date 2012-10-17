@@ -5,7 +5,7 @@ import java.util.Collection;
 import calculator.controller.Command;
 import calculator.controller.InputValue;
 import calculator.model.Display;
-import calculator.model.PocketCalculator;
+import calculator.model.pocket.calculator.PocketCalculator;
 import calculator.view.events.CommandEventListener;
 import calculator.view.events.InputEventListener;
 

@@ -5,8 +5,8 @@ import java.util.Collection;
 
 import calculator.controller.Command.Type;
 import calculator.model.Operator;
-import calculator.model.PocketCalculator;
 import calculator.model.events.DisplayChangedEvent;
+import calculator.model.pocket.calculator.PocketCalculator;
 import calculator.view.CalculatorView;
 import calculator.view.events.CommandEnteredEvent;
 import calculator.view.events.InputEnteredEvent;
@@ -42,7 +42,7 @@ public class PocketCalculatorController implements CalculatorController{
 		Command command = event.getCommand();
 		switch(command.getType()) {
 		case OPERATOR:
-			pocketCalculator.setOperator(command.getOperator());			
+			pocketCalculator.useOperator(command.getOperator());			
 			break;
 		case CALCULATION:
 			pocketCalculator.calculateFromEqualSign();
@@ -56,7 +56,7 @@ public class PocketCalculatorController implements CalculatorController{
 	@Override
 	public void onInputEntered(InputEnteredEvent event) {
 		InputValue input = event.getInput();
-		pocketCalculator.addInput(input.getValue());
+		pocketCalculator.useInput(input.getValue());
 	}
 
 	@Override

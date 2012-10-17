@@ -1,6 +1,7 @@
 package calculator.model;
 
 
+
 public class Calculation {
 
 	private static final String SEPERATOR = " ";

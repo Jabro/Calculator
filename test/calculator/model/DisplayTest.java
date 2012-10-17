@@ -14,7 +14,7 @@ public class DisplayTest {
 	@Test
 	public void testClearDisplay() {
 		Display display = new Display();
-		display.setDisplay(20.0);
+		display.setNumber(20.0);
 		display.clear();
 		assertEquals("0", display.getContent());
 	}
@@ -79,7 +79,7 @@ public class DisplayTest {
 	@Test
 	public void testSetDisplay() {
 		Display display = new Display();
-		display.setDisplay(20.0);
+		display.setNumber(20.0);
 		assertEquals("20", display.getContent());
 	}
 

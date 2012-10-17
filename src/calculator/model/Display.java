@@ -53,7 +53,7 @@ public class Display {
 		return content;
 	}
 
-	public void setDisplay(Double number) {
+	public void setNumber(Double number) {
 		isErrorState = false;
 		if(isInteger(number)) {
 			setContent(String.valueOf(number.intValue()));
