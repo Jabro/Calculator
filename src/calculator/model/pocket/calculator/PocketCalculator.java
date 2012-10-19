@@ -7,7 +7,7 @@ import calculator.model.pocket.calculator.PocketCalculatorState.States;
 
 public class PocketCalculator implements PocketCalculatorStateSupport {
 
-	private boolean operandFinished = false;
+	private boolean isOperandFinished = false;
 	private Display display;
 	private double operand;
 	private double lastOperand;
@@ -57,12 +57,12 @@ public class PocketCalculator implements PocketCalculatorStateSupport {
 	@Override
 	public void setState(States state, boolean operandFinished) {
 		this.state = state;
-		this.operandFinished = operandFinished;
+		this.isOperandFinished = operandFinished;
 	}
 
 	@Override
 	public boolean isOperandFinished() {
-		return operandFinished;
+		return isOperandFinished;
 	}
 
 	@Override
