@@ -2,18 +2,13 @@ package calculator.view;
 
 import java.util.Collection;
 
-import calculator.controller.Command;
 import calculator.controller.InputValue;
+import calculator.controller.commands.Command;
 import calculator.model.Display;
 import calculator.model.pocket.calculator.PocketCalculator;
-import calculator.view.events.CommandEventListener;
 import calculator.view.events.InputEventListener;
 
 public interface CalculatorView {
-	
-	public void addCommandListener(CommandEventListener listener);
-	
-	public void removeCommandListener(CommandEventListener listener);
 	
 	public void addInputListener(InputEventListener listener) ;
 	

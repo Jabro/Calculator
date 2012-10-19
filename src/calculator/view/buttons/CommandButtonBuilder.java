@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import calculator.controller.Command;
+import calculator.controller.commands.Command;
 
 public class CommandButtonBuilder extends ButtonBuilder {
 	

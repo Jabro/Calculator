@@ -3,12 +3,14 @@ package calculator.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import calculator.controller.Command.Type;
+import calculator.controller.commands.CalculateCommand;
+import calculator.controller.commands.ClearCommand;
+import calculator.controller.commands.Command;
+import calculator.controller.commands.OperatorCommand;
 import calculator.model.Operator;
 import calculator.model.events.DisplayChangedEvent;
 import calculator.model.pocket.calculator.PocketCalculator;
 import calculator.view.CalculatorView;
-import calculator.view.events.CommandEnteredEvent;
 import calculator.view.events.InputEnteredEvent;
 
 public class PocketCalculatorController implements CalculatorController{
@@ -38,22 +40,6 @@ public class PocketCalculatorController implements CalculatorController{
 	}
 
 	@Override
-	public void onCommandEntered(CommandEnteredEvent event) {
-		Command command = event.getCommand();
-		switch(command.getType()) {
-		case OPERATOR:
-			pocketCalculator.useOperator(command.getOperator());			
-			break;
-		case CALCULATION:
-			pocketCalculator.calculateFromEqualSign();
-			break;
-		case CLEAR:
-			pocketCalculator.executeClear();
-			break;
-		}
-	}
-
-	@Override
 	public void onInputEntered(InputEnteredEvent event) {
 		InputValue input = event.getInput();
 		pocketCalculator.useInput(input.getValue());
@@ -67,7 +53,6 @@ public class PocketCalculatorController implements CalculatorController{
 	}
 
 	private void configurateView(CalculatorView view) {
-		view.addCommandListener(this);
 		view.addInputListener(this);
 		view.setModels(createCommands(), createInputValues(), pocketCalculator);
 		view.initilize();
@@ -75,13 +60,13 @@ public class PocketCalculatorController implements CalculatorController{
 
 	private Collection<Command> createCommands() {
 		final Collection<Command> commands = new ArrayList<Command>();
-		commands.add(new Command(Operator.PLUS));
-		commands.add(new Command(Operator.MINUS));
-		commands.add(new Command(Operator.MULTIPLICATION));
-		commands.add(new Command(Operator.DIVISION));
-		commands.add(new Command("=", Type.CALCULATION));
-		commands.add(new Command("C", Type.CLEAR));
-		commands.add(new Command(Operator.SQUARE_ROOT));
+		commands.add(new OperatorCommand(pocketCalculator, Operator.PLUS));
+		commands.add(new OperatorCommand(pocketCalculator, Operator.MINUS));
+		commands.add(new OperatorCommand(pocketCalculator, Operator.MULTIPLICATION));
+		commands.add(new OperatorCommand(pocketCalculator, Operator.DIVISION));
+		commands.add(new CalculateCommand(pocketCalculator));
+		commands.add(new ClearCommand(pocketCalculator));
+		commands.add(new OperatorCommand(pocketCalculator, Operator.SQUARE_ROOT));
 		return commands;
 	}
 

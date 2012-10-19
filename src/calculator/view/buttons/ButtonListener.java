@@ -2,8 +2,8 @@ package calculator.view.buttons;
 
 import javax.swing.JButton;
 
-import calculator.controller.Command;
 import calculator.controller.InputValue;
+import calculator.controller.commands.Command;
 
 public interface ButtonListener {
 	

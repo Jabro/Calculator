@@ -11,16 +11,14 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.event.EventListenerList;
 
-import calculator.controller.Command;
 import calculator.controller.InputValue;
+import calculator.controller.commands.Command;
 import calculator.model.Display;
 import calculator.model.pocket.calculator.PocketCalculator;
 import calculator.view.buttons.ButtonBuilder;
 import calculator.view.buttons.ButtonListener;
 import calculator.view.buttons.CommandButtonBuilder;
 import calculator.view.buttons.InputButtonBuilder;
-import calculator.view.events.CommandEnteredEvent;
-import calculator.view.events.CommandEventListener;
 import calculator.view.events.InputEnteredEvent;
 import calculator.view.events.InputEventListener;
 
@@ -99,20 +97,12 @@ public class PocketCalculatorView implements CalculatorView, ButtonListener{
 
 	@Override
 	public void onCommandButtonClicked(JButton button, Command command) {
-		raiseCommandEnteredEvent(new CommandEnteredEvent(this, command));
+		command.execute();
 	}
 
 	@Override
 	public void onInputButtonClicked(JButton button, InputValue input) {
 		raiseInputEnteredEvent(new InputEnteredEvent(this, input));
-	}
-
-	public void addCommandListener(CommandEventListener listener) {
-		listeners.add(CommandEventListener.class, listener);
-	}
-
-	public void removeCommandListener(CommandEventListener listener) {
-		listeners.remove(CommandEventListener.class, listener);
 	}
 
 	public void addInputListener(InputEventListener listener) {
@@ -121,12 +111,6 @@ public class PocketCalculatorView implements CalculatorView, ButtonListener{
 
 	public void removeInputListener(InputEventListener listener) {
 		listeners.remove(InputEventListener.class, listener);
-	}
-
-	private void raiseCommandEnteredEvent(CommandEnteredEvent event) {
-		for (CommandEventListener listener : listeners.getListeners(CommandEventListener.class)) {
-			listener.onCommandEntered(event);
-		}
 	}
 
 	private void raiseInputEnteredEvent(InputEnteredEvent event) {
