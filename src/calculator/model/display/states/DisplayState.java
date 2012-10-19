@@ -1,10 +1,10 @@
-package calculator.model.display;
+package calculator.model.display.states;
 
 public abstract class DisplayState {
 
 	private static final String DEZIMAL_POINT = ".";
 
-	protected enum States {
+	public enum States {
 		CLEAR(ClearDisplayState.getInstance()),
 		INTEGER(IntegerDisplayState.getInstance()),
 		FLOATING_POINT(FloatingPointDisplayState.getInstance()),

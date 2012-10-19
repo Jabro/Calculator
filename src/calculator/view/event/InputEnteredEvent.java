@@ -1,4 +1,4 @@
-package calculator.view.events;
+package calculator.view.event;
 
 import java.util.EventObject;
 

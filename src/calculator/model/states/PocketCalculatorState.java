@@ -1,12 +1,12 @@
-package calculator.model.pocket.calculator;
+package calculator.model.states;
 
 import calculator.model.Calculation;
+import calculator.model.Display;
 import calculator.model.Operator;
-import calculator.model.display.Display;
 
 public abstract class PocketCalculatorState {
 
-	protected enum States {
+	public enum States {
 		CLEAR(ClearPocketCalculatorState.getInstance()),
 		FIRST_OPERAND(FirstOperandPocketCalculatorState.getInstance()),
 		OPERATOR_SET(OperatorSetPocketCalculatorState.getInstance()),
@@ -25,18 +25,18 @@ public abstract class PocketCalculatorState {
 
 	}
 
-	protected void useOperator(PocketCalculatorStateSupport calculator, Operator operator) {
+	public void useOperator(PocketCalculatorStateSupport calculator, Operator operator) {
 		calculator.setOperator(operator);
 		calculator.setLastOperand(calculator.getOperand());	
 	}
 
-	protected void useInput(PocketCalculatorStateSupport calculator, String input) {
+	public void useInput(PocketCalculatorStateSupport calculator, String input) {
 		Display display = calculator.getDisplay();
 		display.addContent(input);
 		calculator.setOperand(display.getNumber());
 	}
 
-	protected void calculate(PocketCalculatorStateSupport calculator, boolean fromEqualSign) {
+	public void calculate(PocketCalculatorStateSupport calculator, boolean fromEqualSign) {
 	}
 
 	protected void calculateSquareRoot(PocketCalculatorStateSupport calculator, Operator operator) {

@@ -8,11 +8,11 @@ import java.util.Map;
 
 import calculator.controller.InputValue;
 import calculator.controller.commands.Command;
-import calculator.model.display.Display;
-import calculator.model.pocket.calculator.PocketCalculator;
+import calculator.model.Display;
+import calculator.model.PocketCalculator;
 import calculator.view.CalculatorView;
-import calculator.view.events.InputEnteredEvent;
-import calculator.view.events.InputEventListener;
+import calculator.view.event.InputEnteredEvent;
+import calculator.view.event.InputEventListener;
 
 public class MockCalculatorView implements CalculatorView, CalculationTestSupport {
 

@@ -1,7 +1,7 @@
 package calculator.controller;
 
-import calculator.model.events.DisplayEventListener;
-import calculator.view.events.InputEventListener;
+import calculator.model.display.event.DisplayEventListener;
+import calculator.view.event.InputEventListener;
 
 public interface CalculatorController extends InputEventListener, DisplayEventListener{
 }

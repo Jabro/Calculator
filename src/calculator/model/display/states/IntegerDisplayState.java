@@ -1,23 +1,23 @@
-package calculator.model.display;
+package calculator.model.display.states;
 
-public class FloatingPointDisplayState extends DisplayState {
+public class IntegerDisplayState extends DisplayState {
 
 	private static DisplayState instance;
 
 	public static DisplayState getInstance() {
 		if(instance == null) {
-			instance = new FloatingPointDisplayState();
+			instance = new IntegerDisplayState();
 		}
 		return instance;
 	}
 
-	private FloatingPointDisplayState() {
+	private IntegerDisplayState() {
 	}
 
 	@Override
 	public void addContent(DisplayStateSupport display, String suffix) {
 		if(isDezimalPoint(suffix)) {
-			return;
+			display.setState(States.FLOATING_POINT);
 		}
 		display.setContent(display.getContent() +  suffix);
 	}

@@ -1,10 +1,11 @@
-package calculator.model.display;
+package calculator.model;
 
 import javax.swing.event.EventListenerList;
 
-import calculator.model.display.DisplayState.States;
-import calculator.model.events.DisplayChangedEvent;
-import calculator.model.events.DisplayEventListener;
+import calculator.model.display.event.DisplayChangedEvent;
+import calculator.model.display.event.DisplayEventListener;
+import calculator.model.display.states.DisplayStateSupport;
+import calculator.model.display.states.DisplayState.States;
 
 public class Display implements DisplayStateSupport {
 

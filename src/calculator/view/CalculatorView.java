@@ -4,9 +4,9 @@ import java.util.Collection;
 
 import calculator.controller.InputValue;
 import calculator.controller.commands.Command;
-import calculator.model.display.Display;
-import calculator.model.pocket.calculator.PocketCalculator;
-import calculator.view.events.InputEventListener;
+import calculator.model.Display;
+import calculator.model.PocketCalculator;
+import calculator.view.event.InputEventListener;
 
 public interface CalculatorView {
 	

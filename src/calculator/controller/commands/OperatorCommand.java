@@ -1,7 +1,7 @@
 package calculator.controller.commands;
 
 import calculator.model.Operator;
-import calculator.model.pocket.calculator.PocketCalculator;
+import calculator.model.PocketCalculator;
 
 public class OperatorCommand extends Command {
 

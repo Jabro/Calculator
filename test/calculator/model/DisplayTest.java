@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import calculator.model.display.Display;
 
 public class DisplayTest {
 

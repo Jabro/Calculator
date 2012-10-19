@@ -1,9 +1,8 @@
-package calculator.model.pocket.calculator;
+package calculator.model;
 
-import calculator.model.Operator;
-import calculator.model.display.Display;
-import calculator.model.events.DisplayEventListener;
-import calculator.model.pocket.calculator.PocketCalculatorState.States;
+import calculator.model.display.event.DisplayEventListener;
+import calculator.model.states.PocketCalculatorStateSupport;
+import calculator.model.states.PocketCalculatorState.States;
 
 public class PocketCalculator implements PocketCalculatorStateSupport {
 

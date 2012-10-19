@@ -1,6 +1,6 @@
 package calculator.controller.commands;
 
-import calculator.model.pocket.calculator.PocketCalculator;
+import calculator.model.PocketCalculator;
 
 public abstract class Command {
 	

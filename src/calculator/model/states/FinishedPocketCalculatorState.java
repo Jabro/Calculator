@@ -1,4 +1,4 @@
-package calculator.model.pocket.calculator;
+package calculator.model.states;
 
 import calculator.model.Operator;
 
@@ -17,7 +17,7 @@ public class FinishedPocketCalculatorState extends PocketCalculatorState {
 	}
 
 	@Override
-	protected void useOperator(PocketCalculatorStateSupport calculator, Operator operator) {
+	public void useOperator(PocketCalculatorStateSupport calculator, Operator operator) {
 		if(operator == Operator.SQUARE_ROOT){
 			calculateSquareRoot(calculator, operator);
 			calculator.setState(States.FIRST_OPERAND, true);
@@ -28,7 +28,7 @@ public class FinishedPocketCalculatorState extends PocketCalculatorState {
 	}
 
 	@Override
-	protected void useInput(PocketCalculatorStateSupport calculator, String input) {
+	public void useInput(PocketCalculatorStateSupport calculator, String input) {
 		calculator.getDisplay().clear();
 		calculator.setState(States.FIRST_OPERAND, false);
 		super.useInput(calculator, input);

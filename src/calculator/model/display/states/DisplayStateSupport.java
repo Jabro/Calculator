@@ -1,6 +1,6 @@
-package calculator.model.display;
+package calculator.model.display.states;
 
-import calculator.model.display.DisplayState.States;
+import calculator.model.display.states.DisplayState.States;
 
 
 public interface DisplayStateSupport {

@@ -1,4 +1,4 @@
-package calculator.model.display;
+package calculator.model.display.states;
 
 public class ClearDisplayState extends DisplayState {
 

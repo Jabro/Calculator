@@ -1,8 +1,8 @@
-package calculator.model.events;
+package calculator.model.display.event;
 
 import java.util.EventObject;
 
-import calculator.model.display.Display;
+import calculator.model.Display;
 
 public class DisplayChangedEvent extends EventObject{
 

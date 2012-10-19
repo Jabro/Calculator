@@ -8,10 +8,10 @@ import calculator.controller.commands.ClearCommand;
 import calculator.controller.commands.Command;
 import calculator.controller.commands.OperatorCommand;
 import calculator.model.Operator;
-import calculator.model.events.DisplayChangedEvent;
-import calculator.model.pocket.calculator.PocketCalculator;
+import calculator.model.PocketCalculator;
+import calculator.model.display.event.DisplayChangedEvent;
 import calculator.view.CalculatorView;
-import calculator.view.events.InputEnteredEvent;
+import calculator.view.event.InputEnteredEvent;
 
 public class PocketCalculatorController implements CalculatorController{
 

@@ -13,14 +13,14 @@ import javax.swing.event.EventListenerList;
 
 import calculator.controller.InputValue;
 import calculator.controller.commands.Command;
-import calculator.model.display.Display;
-import calculator.model.pocket.calculator.PocketCalculator;
+import calculator.model.Display;
+import calculator.model.PocketCalculator;
 import calculator.view.buttons.ButtonBuilder;
 import calculator.view.buttons.ButtonListener;
 import calculator.view.buttons.CommandButtonBuilder;
 import calculator.view.buttons.InputButtonBuilder;
-import calculator.view.events.InputEnteredEvent;
-import calculator.view.events.InputEventListener;
+import calculator.view.event.InputEnteredEvent;
+import calculator.view.event.InputEventListener;
 
 public class PocketCalculatorView implements CalculatorView, ButtonListener{
 

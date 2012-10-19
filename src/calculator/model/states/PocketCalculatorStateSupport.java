@@ -1,8 +1,8 @@
-package calculator.model.pocket.calculator;
+package calculator.model.states;
 
+import calculator.model.Display;
 import calculator.model.Operator;
-import calculator.model.display.Display;
-import calculator.model.pocket.calculator.PocketCalculatorState.States;
+import calculator.model.states.PocketCalculatorState.States;
 
 public interface PocketCalculatorStateSupport {
 
