@@ -13,6 +13,7 @@ public class Display {
 	private String content;
 	private EventListenerList listeners = new EventListenerList();
 	private boolean isErrorState = false;
+	private boolean isInteger = true;
 
 	public Display() {
 		clear();
@@ -20,6 +21,7 @@ public class Display {
 
 	public void clear() {
 		isErrorState = false;
+		isInteger = true;
 		setContent(INITIAL_VALUE);
 	}
 
@@ -34,15 +36,28 @@ public class Display {
 
 	public void addContent(String suffix) {
 		isErrorState = false;
-		if(isInitialDisplay() && !isDezimalPoint(suffix)) {
-			setContent(suffix);
-		} else {
+		if(!isDezimalPoint(suffix)) {
+			if(isInitialDisplay()) {
+				setContent(suffix);
+			} else{
+				setContent(content + suffix);
+			}
+		} else if(isInteger()) {
+			isInteger = false;
 			setContent(content + suffix);
 		}
 	}
 
-	public boolean isDezimalPoint(String suffix) {
-		return suffix.equals(DEZIMAL_POINT);
+	private boolean isInteger() {
+		return isInteger ;
+	}
+
+	private boolean isInteger(Double number) {
+		return number.intValue() == number;
+	}
+
+	public boolean isDezimalPoint(String input) {
+		return input.equals(DEZIMAL_POINT);
 	}
 
 	public boolean isInitialDisplay() {
@@ -54,16 +69,13 @@ public class Display {
 	}
 
 	public void setNumber(Double number) {
+		isInteger = isInteger(number);
 		isErrorState = false;
-		if(isInteger(number)) {
+		if(isInteger) {
 			setContent(String.valueOf(number.intValue()));
 		} else {		
 			setContent(String.valueOf(number));
 		}
-	}
-
-	private boolean isInteger(Double number) {
-		return number.intValue() == number;
 	}
 
 	public void addListener(DisplayEventListener listener) {

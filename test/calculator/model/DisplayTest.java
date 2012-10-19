@@ -49,6 +49,25 @@ public class DisplayTest {
 		display.addContent(".");
 		assertEquals("0.", display.getContent());
 	}
+	
+	@Test
+	public void testAddTwoDecimalPoints() {
+		Display display = new Display();
+		display.clear();
+		display.addContent(".");
+		display.addContent(".");
+		assertEquals("0.", display.getContent());
+	}
+	
+	@Test
+	public void testAddOneDigitBeteenTwoDecimalPoints() {
+		Display display = new Display();
+		display.clear();
+		display.addContent(".");
+		display.addDigit(3);
+		display.addContent(".");
+		assertEquals("0.3", display.getContent());
+	}
 
 	@Test
 	public void testIsDezimalPoint() {
