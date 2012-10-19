@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import calculator.model.display.Display;
+
 public class DisplayTest {
 
 	@Test
@@ -67,32 +69,6 @@ public class DisplayTest {
 		display.addDigit(3);
 		display.addContent(".");
 		assertEquals("0.3", display.getContent());
-	}
-
-	@Test
-	public void testIsDezimalPoint() {
-		Display display = new Display();
-		assertTrue(display.isDezimalPoint("."));
-	}
-	
-	@Test
-	public void testIsDezimalPointFailure() {
-		Display display = new Display();
-		assertFalse(display.isDezimalPoint(","));
-	}
-
-	@Test
-	public void testIsInitialDisplay() {
-		Display display = new Display();
-		display.clear();
-		assertTrue(display.isInitialDisplay());
-	}
-	
-	@Test
-	public void testIsInitialDisplayFailure() {
-		Display display = new Display();
-		display.addContent(".");
-		assertFalse(display.isInitialDisplay());
 	}
 
 	@Test

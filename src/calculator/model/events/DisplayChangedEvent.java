@@ -2,7 +2,7 @@ package calculator.model.events;
 
 import java.util.EventObject;
 
-import calculator.model.Display;
+import calculator.model.display.Display;
 
 public class DisplayChangedEvent extends EventObject{
 

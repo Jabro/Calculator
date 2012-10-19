@@ -19,7 +19,7 @@ public class ClearPocketCalculatorState extends PocketCalculatorState {
 	@Override
 	protected void useOperator(PocketCalculatorStateSupport calculator, Operator operator) {
 			if(operator != Operator.MINUS) {
-				calculator.getDisplay().error();
+				calculator.getDisplay().setErrorState();
 				return;
 			}
 			calculator.setState(States.OPERATOR_SET);

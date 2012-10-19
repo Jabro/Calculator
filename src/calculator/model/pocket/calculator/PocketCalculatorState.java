@@ -1,8 +1,8 @@
 package calculator.model.pocket.calculator;
 
 import calculator.model.Calculation;
-import calculator.model.Display;
 import calculator.model.Operator;
+import calculator.model.display.Display;
 
 public abstract class PocketCalculatorState {
 

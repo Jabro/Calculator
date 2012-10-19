@@ -8,7 +8,7 @@ import java.util.Map;
 
 import calculator.controller.InputValue;
 import calculator.controller.commands.Command;
-import calculator.model.Display;
+import calculator.model.display.Display;
 import calculator.model.pocket.calculator.PocketCalculator;
 import calculator.view.CalculatorView;
 import calculator.view.events.InputEnteredEvent;

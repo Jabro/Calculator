@@ -13,7 +13,7 @@ import javax.swing.event.EventListenerList;
 
 import calculator.controller.InputValue;
 import calculator.controller.commands.Command;
-import calculator.model.Display;
+import calculator.model.display.Display;
 import calculator.model.pocket.calculator.PocketCalculator;
 import calculator.view.buttons.ButtonBuilder;
 import calculator.view.buttons.ButtonListener;
