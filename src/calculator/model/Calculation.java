@@ -1,5 +1,7 @@
 package calculator.model;
 
+import calculator.model.calculation.strategies.CalculationStrategy;
+
 
 
 public class Calculation {
@@ -9,19 +11,22 @@ public class Calculation {
 
 	private final double firstOperand;
 	private final Double secondOperand;
-	private final Operator operator;
+	private final String operatorSign;
+	private final CalculationStrategy calculationStrategy;
 	private Double result;
 
 	public Calculation(double firstOperand, Operator operator, double secondOperand) {
 		this.firstOperand = firstOperand;
-		this.operator = operator;
-		this.secondOperand = secondOperand;		
+		this.secondOperand = secondOperand;
+		this.operatorSign = operator.getSign();
+		this.calculationStrategy = operator.getCalculationStrategy();
 	}
 
 	public Calculation(Operator operator, double operand) {
-		this.operator = operator;
 		this.firstOperand = operand;
 		this.secondOperand = null;
+		this.operatorSign = operator.getSign();
+		this.calculationStrategy = operator.getCalculationStrategy();
 	}
 
 	public static double calculateResult(double firstOperand, Operator operator, double secondOperand) {
@@ -33,7 +38,7 @@ public class Calculation {
 	}
 
 	public double calculate() {
-		result = operator.getCalculationStrategy().calculate(firstOperand, secondOperand);
+		result = calculationStrategy.calculate(firstOperand, secondOperand);
 		System.out.println(this);	
 		return result;
 	}
@@ -45,7 +50,7 @@ public class Calculation {
 			buffer.append(firstOperand);
 			buffer.append(SEPERATOR);
 		}
-		buffer.append(operator);
+		buffer.append(operatorSign);
 		buffer.append(SEPERATOR);
 		if(secondOperand != null) {			
 			buffer.append(secondOperand);
