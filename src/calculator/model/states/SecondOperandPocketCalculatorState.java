@@ -21,11 +21,11 @@ public class SecondOperandPocketCalculatorState extends PocketCalculatorState {
 	public void useOperator(PocketCalculatorStateSupport calculator, Operator operator) {
 		if(operator == Operator.SQUARE_ROOT){
 			calculateSquareRoot(calculator, operator);
-			calculator.setState(States.SECOND_OPERAND, true);
+			calculator.setState(SecondOperandPocketCalculatorState.getInstance(), true);
 			return;
 		}
 		calculate(calculator, false);
-		calculator.setState(States.OPERATOR_SET);
+		calculator.setState(OperatorSetPocketCalculatorState.getInstance());
 		super.useOperator(calculator, operator);
 	}
 
@@ -33,9 +33,9 @@ public class SecondOperandPocketCalculatorState extends PocketCalculatorState {
 	public void useInput(PocketCalculatorStateSupport calculator, String input) {
 		if(calculator.isOperandFinished()) {
 			calculator.getDisplay().clear();
-			calculator.setState(States.FIRST_OPERAND, false);
+			calculator.setState(FirstOperandPocketCalculatorState.getInstance(), false);
 		} else {
-			calculator.setState(States.SECOND_OPERAND, false);
+			calculator.setState(SecondOperandPocketCalculatorState.getInstance(), false);
 		}		
 		super.useInput(calculator, input);
 	}
@@ -48,9 +48,9 @@ public class SecondOperandPocketCalculatorState extends PocketCalculatorState {
 		calculator.setOperand(result);
 		calculator.setOperator(null);
 		if(fromEqualSign) {
-			calculator.setState(States.FINISHED);
+			calculator.setState(FinishedPocketCalculatorState.getInstance());
 		} else {
-			calculator.setState(States.SECOND_OPERAND, false);
+			calculator.setState(SecondOperandPocketCalculatorState.getInstance(), false);
 		}
 	}
 

@@ -6,7 +6,7 @@ public class ClearPocketCalculatorState extends PocketCalculatorState {
 
 	private static ClearPocketCalculatorState instance;
 
-	protected static PocketCalculatorState getInstance() {
+	public static PocketCalculatorState getInstance() {
 		if(instance == null) {
 			instance = new ClearPocketCalculatorState();
 		}
@@ -22,14 +22,14 @@ public class ClearPocketCalculatorState extends PocketCalculatorState {
 				calculator.getDisplay().setErrorState();
 				return;
 			}
-			calculator.setState(States.OPERATOR_SET);
+			calculator.setState(OperatorSetPocketCalculatorState.getInstance());
 			super.useOperator(calculator, operator);
 	}
 
 	@Override
 	public void useInput(PocketCalculatorStateSupport calculator, String input) {
 		calculator.getDisplay().clear();
-		calculator.setState(States.FIRST_OPERAND, false);
+		calculator.setState(FirstOperandPocketCalculatorState.getInstance(), false);
 		super.useInput(calculator, input);
 	}
 

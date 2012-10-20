@@ -24,7 +24,7 @@ public class OperatorSetPocketCalculatorState extends PocketCalculatorState {
 	@Override
 	public void useInput(PocketCalculatorStateSupport calculator, String input) {
 		calculator.getDisplay().clear();
-		calculator.setState(States.SECOND_OPERAND, false);
+		calculator.setState(SecondOperandPocketCalculatorState.getInstance(), false);
 		super.useInput(calculator, input);
 	}
 

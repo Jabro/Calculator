@@ -20,17 +20,17 @@ public class FinishedPocketCalculatorState extends PocketCalculatorState {
 	public void useOperator(PocketCalculatorStateSupport calculator, Operator operator) {
 		if(operator == Operator.SQUARE_ROOT){
 			calculateSquareRoot(calculator, operator);
-			calculator.setState(States.FIRST_OPERAND, true);
+			calculator.setState(FirstOperandPocketCalculatorState.getInstance(), true);
 			return;
 		}
-		calculator.setState(States.OPERATOR_SET);
+		calculator.setState(OperatorSetPocketCalculatorState.getInstance());
 		super.useOperator(calculator, operator);
 	}
 
 	@Override
 	public void useInput(PocketCalculatorStateSupport calculator, String input) {
 		calculator.getDisplay().clear();
-		calculator.setState(States.FIRST_OPERAND, false);
+		calculator.setState(FirstOperandPocketCalculatorState.getInstance(), false);
 		super.useInput(calculator, input);
 	}
 

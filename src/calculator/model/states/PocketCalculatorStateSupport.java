@@ -2,13 +2,12 @@ package calculator.model.states;
 
 import calculator.model.Display;
 import calculator.model.Operator;
-import calculator.model.states.PocketCalculatorState.States;
 
 public interface PocketCalculatorStateSupport {
 
-	void setState(States state);	
+	void setState(PocketCalculatorState state);	
 
-	void setState(States state, boolean operandFinished);
+	void setState(PocketCalculatorState state, boolean operandFinished);
 	
 	boolean isOperandFinished();
 	
