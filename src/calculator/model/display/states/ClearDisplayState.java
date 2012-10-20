@@ -2,9 +2,9 @@ package calculator.model.display.states;
 
 public class ClearDisplayState extends DisplayState {
 
-	private static DisplayState instance;
+	private static ClearDisplayState instance;
 
-	public static DisplayState getInstance() {
+	public static ClearDisplayState getInstance() {
 		if(instance == null) {
 			instance = new ClearDisplayState();
 		}

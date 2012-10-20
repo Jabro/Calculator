@@ -2,9 +2,9 @@ package calculator.model.display.states;
 
 public class FloatingPointDisplayState extends DisplayState {
 
-	private static DisplayState instance;
+	private static FloatingPointDisplayState instance;
 
-	public static DisplayState getInstance() {
+	public static FloatingPointDisplayState getInstance() {
 		if(instance == null) {
 			instance = new FloatingPointDisplayState();
 		}

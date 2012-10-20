@@ -2,9 +2,9 @@ package calculator.model.display.states;
 
 public class ErrorDisplayState extends DisplayState {
 
-	private static DisplayState instance;
+	private static ErrorDisplayState instance;
 
-	public static DisplayState getInstance() {
+	public static ErrorDisplayState getInstance() {
 		if(instance == null) {
 			instance = new ErrorDisplayState();
 		}
