@@ -1,9 +1,7 @@
 package calculator.model;
 
-import javax.swing.event.EventListenerList;
-
 import calculator.model.display.event.DisplayChangedEvent;
-import calculator.model.display.event.DisplayEventListener;
+import calculator.model.display.event.DisplayEventSupport;
 import calculator.model.display.states.ClearDisplayState;
 import calculator.model.display.states.DisplayState;
 import calculator.model.display.states.DisplayStateSupport;
@@ -11,12 +9,11 @@ import calculator.model.display.states.ErrorDisplayState;
 import calculator.model.display.states.FloatingPointDisplayState;
 import calculator.model.display.states.IntegerDisplayState;
 
-public class Display implements DisplayStateSupport {
+public class Display extends DisplayEventSupport implements DisplayStateSupport {
 
 	private static final String YOU_DO_NOT_RESPECT_THE_WORKFLOW = "YOU DO NOT RESPECT THE WORKFLOW";
 	private static final String INITIAL_VALUE = "0";
 	private String content;
-	private EventListenerList listeners = new EventListenerList();
 	private DisplayState state;
 
 	public Display() {
@@ -37,12 +34,6 @@ public class Display implements DisplayStateSupport {
 		raiseDisplayChangedEvent(new DisplayChangedEvent(this, this));
 	}
 
-	private void raiseDisplayChangedEvent(DisplayChangedEvent event) {
-		for (DisplayEventListener listener : listeners.getListeners(DisplayEventListener.class)) {
-			listener.onDisplayChanged(event);
-		}
-	}
-
 	public void addContent(String suffix) {
 		state.addContent(this, suffix);
 	}
@@ -59,14 +50,6 @@ public class Display implements DisplayStateSupport {
 
 	private boolean isInteger(Double number) {
 		return number.intValue() == number;
-	}
-
-	public void addListener(DisplayEventListener listener) {
-		listeners .add(DisplayEventListener.class, listener);
-	}
-
-	public void removeListener(DisplayEventListener listener) {
-		listeners.remove(DisplayEventListener.class, listener);
 	}
 
 	public String getContent() {

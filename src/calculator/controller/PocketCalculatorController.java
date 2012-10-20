@@ -13,9 +13,10 @@ import calculator.model.Calculator;
 import calculator.model.Operator;
 import calculator.model.PocketCalculator;
 import calculator.model.display.event.DisplayChangedEvent;
+import calculator.model.display.event.DisplayEventListener;
 import calculator.view.CalculatorView;
 
-public class PocketCalculatorController implements CalculatorController{
+public class PocketCalculatorController implements CalculatorController, DisplayEventListener {
 
 	private final Collection<CalculatorView> views;
 	private final Calculator calculator;
