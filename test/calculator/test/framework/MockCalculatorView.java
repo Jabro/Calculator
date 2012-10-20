@@ -8,8 +8,8 @@ import java.util.Map;
 
 import calculator.controller.InputValue;
 import calculator.controller.commands.Command;
+import calculator.model.Calculator;
 import calculator.model.Display;
-import calculator.model.PocketCalculator;
 import calculator.view.CalculatorView;
 import calculator.view.event.InputEnteredEvent;
 import calculator.view.event.InputEventListener;
@@ -44,8 +44,8 @@ public class MockCalculatorView implements CalculatorView, CalculationTestSuppor
 
 	@Override
 	public void setModels(Collection<Command> commands,
-			Collection<InputValue> inputValues, PocketCalculator pocketCalculator) {
-		this.content = pocketCalculator.getDisplay().getContent();
+			Collection<InputValue> inputValues, Calculator calculator) {
+		this.content = calculator.getDisplay().getContent();
 		for (Command command : commands) {
 			this.commands .put(command.getName(), command);
 		}

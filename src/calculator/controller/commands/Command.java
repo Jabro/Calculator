@@ -1,14 +1,14 @@
 package calculator.controller.commands;
 
-import calculator.model.PocketCalculator;
+import calculator.model.Calculator;
 
 public abstract class Command {
 	
 	private final String name;
-	protected final PocketCalculator pocketCalculator;
+	protected final Calculator calculator;
 
-	public Command(PocketCalculator pocketCalculator, String name) {
-		this.pocketCalculator = pocketCalculator;
+	public Command(Calculator calculator, String name) {
+		this.calculator = calculator;
 		this.name = name;
 	}
 	

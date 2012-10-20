@@ -1,18 +1,18 @@
 package calculator.controller.commands;
 
-import calculator.model.PocketCalculator;
+import calculator.model.Calculator;
 
 public class ClearCommand extends Command {
 
 	private static final String CLEAR_SIGN = "C";
 
-	public ClearCommand(PocketCalculator pocketCalculator) {
-		super(pocketCalculator, CLEAR_SIGN);
+	public ClearCommand(Calculator calculator) {
+		super(calculator, CLEAR_SIGN);
 	}
 
 	@Override
 	public void execute() {
-		pocketCalculator.executeClear();
+		calculator.executeClear();
 	}
 	
 }

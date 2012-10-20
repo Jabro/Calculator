@@ -1,18 +1,18 @@
 package calculator.controller.commands;
 
-import calculator.model.PocketCalculator;
+import calculator.model.Calculator;
 
 public class CalculateCommand extends Command {
 
 	private static final String EQUAL_SIGN = "=";
 
-	public CalculateCommand(PocketCalculator pocketCalculator) {
-		super(pocketCalculator, EQUAL_SIGN);
+	public CalculateCommand(Calculator calculator) {
+		super(calculator, EQUAL_SIGN);
 	}
 
 	@Override
 	public void execute() {
-		pocketCalculator.calculateFromEqualSign();
+		calculator.calculateFromEqualSign();
 	}
 	
 }

@@ -5,7 +5,7 @@ import calculator.model.states.ClearPocketCalculatorState;
 import calculator.model.states.PocketCalculatorState;
 import calculator.model.states.PocketCalculatorStateSupport;
 
-public class PocketCalculator implements PocketCalculatorStateSupport {
+public class PocketCalculator implements Calculator, PocketCalculatorStateSupport {
 
 	private boolean isOperandFinished = false;
 	private Display display;
@@ -18,26 +18,32 @@ public class PocketCalculator implements PocketCalculatorStateSupport {
 		display = new Display();
 	}
 
+	@Override
 	public void addListener(DisplayEventListener listener) {
 		display.addListener(listener);		
 	}
 
+	@Override
 	public void removeListener(DisplayEventListener listener) {
 		display.removeListener(listener);		
 	}
 
+	@Override
 	public void useOperator(Operator operator) {
 		state.useOperator(this, operator);
 	}
 
+	@Override
 	public void calculateFromEqualSign() {
 		state.calculate(this, true);
 	}
 
+	@Override
 	public void useInput(String input) {
 		state.useInput(this, input);
 	}
 	
+	@Override
 	public void executeClear() {
 		lastOperand = operand = 0;
 		state = ClearPocketCalculatorState.getInstance();
