@@ -5,9 +5,11 @@ import calculator.model.Calculator;
 public class CalculateCommand extends Command {
 
 	private static final String EQUAL_SIGN = "=";
+	private final Calculator calculator;
 
 	public CalculateCommand(Calculator calculator) {
-		super(calculator, EQUAL_SIGN);
+		super(EQUAL_SIGN);
+		this.calculator = calculator;
 	}
 
 	@Override

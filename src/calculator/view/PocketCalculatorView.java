@@ -43,7 +43,7 @@ public class PocketCalculatorView implements CalculatorView {
 			if(!(command instanceof InputDigitCommand)) {
 				button.setBackground(Color.WHITE);
 			}
-			button.addActionListener(command);
+			button.addActionListener(new CommandInvoker(command));
 			buttons[i++] = button;
 		}
 		return buttons;

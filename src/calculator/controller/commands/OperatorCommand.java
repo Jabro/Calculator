@@ -6,9 +6,11 @@ import calculator.model.Operator;
 public class OperatorCommand extends Command {
 
 	private final Operator operator;
+	private final Calculator calculator;
 
 	public OperatorCommand(Calculator calculator, Operator operator) {
-		super(calculator, operator.getSign());
+		super(operator.getSign());
+		this.calculator = calculator;
 		this.operator = operator;
 	}
 
