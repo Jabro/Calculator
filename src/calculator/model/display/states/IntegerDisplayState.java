@@ -17,7 +17,7 @@ public class IntegerDisplayState extends DisplayState {
 	@Override
 	public void addContent(DisplayStateSupport display, String suffix) {
 		if(isDezimalPoint(suffix)) {
-			display.setState(States.FLOATING_POINT);
+			display.setState(FloatingPointDisplayState.getInstance());
 		}
 		display.setContent(display.getContent() +  suffix);
 	}

@@ -4,8 +4,12 @@ import javax.swing.event.EventListenerList;
 
 import calculator.model.display.event.DisplayChangedEvent;
 import calculator.model.display.event.DisplayEventListener;
+import calculator.model.display.states.ClearDisplayState;
+import calculator.model.display.states.DisplayState;
 import calculator.model.display.states.DisplayStateSupport;
-import calculator.model.display.states.DisplayState.States;
+import calculator.model.display.states.ErrorDisplayState;
+import calculator.model.display.states.FloatingPointDisplayState;
+import calculator.model.display.states.IntegerDisplayState;
 
 public class Display implements DisplayStateSupport {
 
@@ -13,8 +17,7 @@ public class Display implements DisplayStateSupport {
 	private static final String INITIAL_VALUE = "0";
 	private String content;
 	private EventListenerList listeners = new EventListenerList();
-	
-	private States state = States.CLEAR;
+	private DisplayState state;
 
 	public Display() {
 		clear();
@@ -22,7 +25,7 @@ public class Display implements DisplayStateSupport {
 
 	public void clear() {
 		setContent(INITIAL_VALUE);
-		setState(States.CLEAR);
+		setState(ClearDisplayState.getInstance());
 	}
 
 	public void addDigit(int digit) {
@@ -41,15 +44,15 @@ public class Display implements DisplayStateSupport {
 	}
 
 	public void addContent(String suffix) {
-		state.getState().addContent(this, suffix);
+		state.addContent(this, suffix);
 	}
 
 	public void setNumber(Double number) {
 		if(isInteger(number)) {
-			setState(States.INTEGER);
+			setState(IntegerDisplayState.getInstance());
 			setContent(String.valueOf(number.intValue()));
 		} else {		
-			setState(States.FLOATING_POINT);
+			setState(FloatingPointDisplayState.getInstance());
 			setContent(String.valueOf(number));
 		}
 	}
@@ -75,16 +78,16 @@ public class Display implements DisplayStateSupport {
 	}
 
 	public void setErrorState() {
-		setState(States.ERROR);
+		setState(ErrorDisplayState.getInstance());
 		setContent(YOU_DO_NOT_RESPECT_THE_WORKFLOW);		
 	}
 
 	public boolean isErrorMessage() {
-		return state == States.ERROR;
+		return state.isErrorState();
 	}
 
 	@Override
-	public void setState(States state) {
+	public void setState(DisplayState state) {
 		this.state = state;
 	}
 

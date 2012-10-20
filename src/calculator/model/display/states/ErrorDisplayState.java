@@ -17,16 +17,21 @@ public class ErrorDisplayState extends DisplayState {
 	@Override
 	public void addContent(DisplayStateSupport display, String suffix) {
 		if(display.isInitialValue(suffix)) {
-			display.setState(States.CLEAR);
+			display.setState(ClearDisplayState.getInstance());
 			display.setContent(DisplayStateSupport.INITIAL_VALUE);
 		}
 		if(!isDezimalPoint(suffix)) {
-			display.setState(States.INTEGER);
+			display.setState(IntegerDisplayState.getInstance());
 			display.setContent(suffix);
 		} else {
-			display.setState(States.FLOATING_POINT);
+			display.setState(FloatingPointDisplayState.getInstance());
 			display.setContent(DisplayStateSupport.INITIAL_VALUE + suffix);
 		}
+	}
+	
+	@Override
+	public boolean isErrorState() {
+		return true;
 	}
 
 }

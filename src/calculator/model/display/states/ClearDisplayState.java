@@ -20,10 +20,10 @@ public class ClearDisplayState extends DisplayState {
 			return;
 		}
 		if(!isDezimalPoint(suffix)) {
-			display.setState(States.INTEGER);
+			display.setState(IntegerDisplayState.getInstance());
 			display.setContent(suffix);
 		} else {
-			display.setState(States.FLOATING_POINT);
+			display.setState(FloatingPointDisplayState.getInstance());
 			display.setContent(DisplayStateSupport.INITIAL_VALUE + suffix);
 		}
 	}
