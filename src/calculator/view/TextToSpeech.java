@@ -1,8 +1,8 @@
 package calculator.view;
 
 import java.io.IOException;
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class TextToSpeech extends Thread {
 
@@ -12,54 +12,29 @@ public class TextToSpeech extends Thread {
 	private static final String SCRIPT_NAME   = "textToSpeech.vbs";
 	private static final int NO_ERROR = 0;
 	private static TextToSpeech instance;
-	private final Deque<String> textQueue = new LinkedList<String>();
+	private final static Queue<String> textQueue = new ConcurrentLinkedQueue<String>();
 
-	public void addText(String text) {
-		textQueue.addLast(text);
-	}
-
-	static synchronized void speak(String text) {
+	static void speak(String text) {
+		textQueue.add(text);
 		if(instance == null) {
-			startNewInstance(text);
-		} else {
-			// thread is still running
-			tryToAddTextToRunningThread(text);
-		}
-	}
-
-	private static void tryToAddTextToRunningThread(String text) {
-		try {
-			// Prevent closing from running thread
-			// before we can enter the text
-			// Thread.sleep(1000); // for testing
-			synchronized (instance.textQueue) {
-				instance.addText(text);
+			synchronized (textQueue) {
+				if(instance == null) {
+					instance = new TextToSpeech();
+					instance.start();
+				}
 			}
-		} catch (NullPointerException e) {
-			startNewInstance(text);
-		}		
-	}
-
-	private static void startNewInstance(String text) {
-		instance = new TextToSpeech();
-		instance.addText(text);
-		instance.start();
+		}
 	}
 
 	public void run() {
-		while(instance != null) {
-			String text = null;
-			synchronized (textQueue) {
-				if(!textQueue.isEmpty()) {
-					text = textQueue.removeFirst();
-				} else {
-					instance = null;
-				}
-			}
-			if(text != null) {
+		String text = null;
+		do{
+			if((text = textQueue.poll()) != null) {
 				runProcess(text);
+			} else {
+				instance = null;
 			}
-		}
+		} while(instance != null);
 	}
 
 	private void runProcess(String text) {
