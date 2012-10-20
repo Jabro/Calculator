@@ -1,8 +1,11 @@
 package calculator.controller.commands;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import calculator.model.Calculator;
 
-public abstract class Command {
+public abstract class Command implements ActionListener {
 	
 	private final String name;
 	protected final Calculator calculator;
@@ -17,6 +20,11 @@ public abstract class Command {
 	}
 	
 	abstract public void execute();
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		execute();
+	}
 
 	@Override
 	public String toString() {

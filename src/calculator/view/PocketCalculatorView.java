@@ -1,6 +1,7 @@
 package calculator.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.Collection;
 
@@ -9,45 +10,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
-import javax.swing.event.EventListenerList;
 
-import calculator.controller.InputValue;
 import calculator.controller.commands.Command;
+import calculator.controller.commands.InputDigitCommand;
 import calculator.model.Calculator;
 import calculator.model.Display;
-import calculator.view.buttons.ButtonBuilder;
-import calculator.view.buttons.ButtonListener;
-import calculator.view.buttons.CommandButtonBuilder;
-import calculator.view.buttons.InputButtonBuilder;
-import calculator.view.event.InputEnteredEvent;
-import calculator.view.event.InputEventListener;
 
-public class PocketCalculatorView implements CalculatorView, ButtonListener{
+public class PocketCalculatorView implements CalculatorView {
 
-	private EventListenerList listeners = new EventListenerList();
 	private JTextField displayField;
-	private Collection<Command> commands;
-	private Collection<InputValue> inputValues;
-	private Calculator calculator;
 
 	@Override
-	public void setModels(Collection<Command> commands,
-			Collection<InputValue> inputValues, Calculator calculator) {
-				this.commands = commands;
-				this.inputValues = inputValues;
-				this.calculator = calculator;
-	}
-	
-	@Override
-	public void initilize() {
-		JButton[] inputButtons = buildButtons(inputValues, new InputButtonBuilder());
-		JButton[] commandButtons = buildButtons(commands, new CommandButtonBuilder());
-				
+	public void initilize(Collection<Command> commands, Calculator calculator) {
 		createDisplayField(calculator.getDisplay());
 		JPanel panel = createPanel();
-		addButtons(panel, inputButtons);
-		addButtons(panel, commandButtons);
-		
+		addButtons(panel, createCommandButtons(commands));
 		JFrame frame = new JFrame("Calculator");
 		frame.setLayout(new BorderLayout());
 		frame.add(displayField, BorderLayout.NORTH);
@@ -55,6 +32,21 @@ public class PocketCalculatorView implements CalculatorView, ButtonListener{
 		frame.setSize(350, 350);		
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	}
+
+	private JButton[] createCommandButtons(Collection<Command> commands) {
+		JButton[] buttons = new JButton[commands.size()];
+		int i = 0;
+		for (final Command command : commands) {
+			JButton button = new JButton();
+			button.setText(command.getName());
+			if(!(command instanceof InputDigitCommand)) {
+				button.setBackground(Color.WHITE);
+			}
+			button.addActionListener(command);
+			buttons[i++] = button;
+		}
+		return buttons;
 	}
 
 	private void createDisplayField(Display display) {
@@ -74,49 +66,12 @@ public class PocketCalculatorView implements CalculatorView, ButtonListener{
 		}
 	}
 
-	private JButton[] buildButtons(Collection<? extends Object> refences, ButtonBuilder builder) {
-		JButton[] buttons = new JButton[refences.size()];
-		int i = 0;
-		for (final Object reference : refences) {
-			builder.createNewButton(reference);
-			builder.buildText();
-			builder.buildStyle();
-			builder.buildActionListener(this);
-			buttons[i++] = builder.getButton();
-		}
-		return buttons;
-	}
-
 	@Override
 	public void updateDisplay(Display display) {
 		if(display.isErrorMessage()) {
 			TextToSpeech.speak(display.getContent());
 		}
 		displayField.setText(display.getContent());
-	}
-
-	@Override
-	public void onCommandButtonClicked(JButton button, Command command) {
-		command.execute();
-	}
-
-	@Override
-	public void onInputButtonClicked(JButton button, InputValue input) {
-		raiseInputEnteredEvent(new InputEnteredEvent(this, input));
-	}
-
-	public void addInputListener(InputEventListener listener) {
-		listeners.add(InputEventListener.class, listener);
-	}
-
-	public void removeInputListener(InputEventListener listener) {
-		listeners.remove(InputEventListener.class, listener);
-	}
-
-	private void raiseInputEnteredEvent(InputEnteredEvent event) {
-		for (InputEventListener listener : listeners.getListeners(InputEventListener.class)) {
-			listener.onInputEntered(event);
-		}
 	}
 
 }

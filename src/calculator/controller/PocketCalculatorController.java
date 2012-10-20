@@ -6,13 +6,14 @@ import java.util.Collection;
 import calculator.controller.commands.CalculateCommand;
 import calculator.controller.commands.ClearCommand;
 import calculator.controller.commands.Command;
+import calculator.controller.commands.InputCommand;
+import calculator.controller.commands.InputDigitCommand;
 import calculator.controller.commands.OperatorCommand;
 import calculator.model.Calculator;
 import calculator.model.Operator;
 import calculator.model.PocketCalculator;
 import calculator.model.display.event.DisplayChangedEvent;
 import calculator.view.CalculatorView;
-import calculator.view.event.InputEnteredEvent;
 
 public class PocketCalculatorController implements CalculatorController{
 
@@ -24,8 +25,9 @@ public class PocketCalculatorController implements CalculatorController{
 		calculator = new PocketCalculator();
 		calculator.addListener(this);		
 		// views
+		Collection<Command> commands = createCommands();
 		for (CalculatorView view : views) {
-			configurateView(view);
+			view.initilize(commands , calculator);
 		}
 		this.views = views;
 	}
@@ -37,13 +39,7 @@ public class PocketCalculatorController implements CalculatorController{
 		// views
 		views = new ArrayList<CalculatorView>();
 		views.add(view);
-		configurateView(view);		
-	}
-
-	@Override
-	public void onInputEntered(InputEnteredEvent event) {
-		InputValue input = event.getInput();
-		calculator.useInput(input.getValue());
+		view.initilize(createCommands(), calculator);		
 	}
 
 	@Override
@@ -53,31 +49,22 @@ public class PocketCalculatorController implements CalculatorController{
 		}
 	}
 
-	private void configurateView(CalculatorView view) {
-		view.addInputListener(this);
-		view.setModels(createCommands(), createInputValues(), calculator);
-		view.initilize();
-	}
-
 	private Collection<Command> createCommands() {
 		final Collection<Command> commands = new ArrayList<Command>();
-		commands.add(new OperatorCommand(calculator, Operator.PLUS));
-		commands.add(new OperatorCommand(calculator, Operator.MINUS));
-		commands.add(new OperatorCommand(calculator, Operator.MULTIPLICATION));
-		commands.add(new OperatorCommand(calculator, Operator.DIVISION));
+		for (int i = 0; i <= 9; i++) {
+			commands.add(new InputDigitCommand(calculator, i));
+		}
+		commands.add(new InputCommand(calculator, "."));
+		for (Operator operator : Operator.values()) {
+			if(operator == Operator.SQUARE_ROOT) {
+				continue;
+			}
+			commands.add(new OperatorCommand(calculator, operator));
+		}
 		commands.add(new CalculateCommand(calculator));
 		commands.add(new ClearCommand(calculator));
 		commands.add(new OperatorCommand(calculator, Operator.SQUARE_ROOT));
 		return commands;
-	}
-
-	private Collection<InputValue> createInputValues() {
-		final Collection<InputValue> inputValues = new ArrayList<InputValue>();
-		for (int i = 0; i <= 9; i++) {
-			inputValues.add(new InputValue(i));
-		}
-		inputValues.add(new InputValue("."));
-		return inputValues;
 	}
 
 }
