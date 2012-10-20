@@ -24,8 +24,8 @@ public class Display implements DisplayStateSupport {
 	}
 
 	public void clear() {
-		setContent(INITIAL_VALUE);
 		setState(ClearDisplayState.getInstance());
+		setContent(INITIAL_VALUE);
 	}
 
 	public void addDigit(int digit) {
