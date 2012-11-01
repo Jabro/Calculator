@@ -13,12 +13,8 @@ public class Display extends DisplayEventSupport implements DisplayStateSupport 
 
 	private static final String YOU_DO_NOT_RESPECT_THE_WORKFLOW = "YOU DO NOT RESPECT THE WORKFLOW";
 	private static final String INITIAL_VALUE = "0";
-	private String content;
-	private DisplayState state;
-
-	public Display() {
-		clear();
-	}
+	private String content = INITIAL_VALUE;
+	private DisplayState state = ClearDisplayState.getInstance();
 
 	public void clear() {
 		setState(ClearDisplayState.getInstance());
