@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import de.youngdevelopers.calculator.model.Display;
+
 
 public class DisplayTest {
 

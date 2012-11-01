@@ -6,10 +6,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import calculator.controller.commands.Command;
-import calculator.model.Calculator;
-import calculator.model.Display;
-import calculator.view.CalculatorView;
+import de.youngdevelopers.calculator.controller.commands.Command;
+import de.youngdevelopers.calculator.model.Calculator;
+import de.youngdevelopers.calculator.model.Display;
+import de.youngdevelopers.calculator.view.CalculatorView;
 
 public class MockCalculatorView implements CalculatorView, CalculationTestSupport {
 

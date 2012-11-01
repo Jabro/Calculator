@@ -4,13 +4,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import calculator.model.calculation.strategies.CalculationStrategy;
-import calculator.model.calculation.strategies.DivisionCalculationStrategy;
-import calculator.model.calculation.strategies.MinusCalculationStrategy;
-import calculator.model.calculation.strategies.MultiplicationCalculationStrategy;
-import calculator.model.calculation.strategies.PlusCalculationStrategy;
-import calculator.model.calculation.strategies.SquareRootCalculationStrategy;
 import calculator.test.framework.CalculationTestSupport;
+import de.youngdevelopers.calculator.model.calculation.strategies.CalculationStrategy;
+import de.youngdevelopers.calculator.model.calculation.strategies.DivisionCalculationStrategy;
+import de.youngdevelopers.calculator.model.calculation.strategies.MinusCalculationStrategy;
+import de.youngdevelopers.calculator.model.calculation.strategies.MultiplicationCalculationStrategy;
+import de.youngdevelopers.calculator.model.calculation.strategies.PlusCalculationStrategy;
+import de.youngdevelopers.calculator.model.calculation.strategies.SquareRootCalculationStrategy;
 
 public class CalculationStrategyTest implements CalculationTestSupport {
 	

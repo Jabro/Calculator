@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import calculator.test.framework.CalculationTestSupport;
+import de.youngdevelopers.calculator.model.Calculation;
+import de.youngdevelopers.calculator.model.Operator;
 
 public class CalculatorTest implements CalculationTestSupport {
 
