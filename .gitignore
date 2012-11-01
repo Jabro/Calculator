@@ -2,6 +2,7 @@
 *.project
 *.classpath
 .settings/
+.sonar/
 
 # Package Files #
 *.jar
