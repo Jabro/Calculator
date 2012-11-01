@@ -3,6 +3,7 @@
 *.classpath
 .settings/
 .sonar/
+target/
 
 # Package Files #
 *.jar
