@@ -8,8 +8,8 @@ import de.youngdevelopers.calculator.model.Display;
 
 public interface CalculatorView {
 	
-	public void updateDisplay(Display display);
+	void updateDisplay(Display display);
 
-	public void initilize(Collection<Command> commands, Calculator calculator);
+	void initilize(Collection<Command> commands, Calculator calculator);
 
 }

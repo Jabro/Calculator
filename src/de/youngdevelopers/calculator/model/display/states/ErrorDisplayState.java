@@ -1,6 +1,6 @@
 package de.youngdevelopers.calculator.model.display.states;
 
-public class ErrorDisplayState extends DisplayState {
+public final class ErrorDisplayState extends DisplayState {
 
 	private static ErrorDisplayState instance;
 

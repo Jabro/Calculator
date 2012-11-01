@@ -12,12 +12,12 @@ public class TextToSpeech extends Thread {
 	private static final String SCRIPT_NAME   = "textToSpeech.vbs";
 	private static final int NO_ERROR = 0;
 	private static TextToSpeech instance;
-	private final static Queue<String> textQueue = new ConcurrentLinkedQueue<String>();
+	private static final  Queue<String> TEXT_QUEUE = new ConcurrentLinkedQueue<String>();
 
 	static void speak(String text) {
-		textQueue.add(text);
+		TEXT_QUEUE.add(text);
 		if(instance == null) {
-			synchronized (textQueue) {
+			synchronized (TEXT_QUEUE) {
 				if(instance == null) {
 					instance = new TextToSpeech();
 					instance.start();
@@ -29,7 +29,7 @@ public class TextToSpeech extends Thread {
 	public void run() {
 		String text = null;
 		do{
-			if((text = textQueue.poll()) != null) {
+			if((text = TEXT_QUEUE.poll()) != null) {
 				runProcess(text);
 			} else {
 				instance = null;

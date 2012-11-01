@@ -2,7 +2,7 @@ package de.youngdevelopers.calculator.model.states;
 
 import de.youngdevelopers.calculator.model.Operator;
 
-public class FinishedPocketCalculatorState extends PocketCalculatorState {
+public final class FinishedPocketCalculatorState extends PocketCalculatorState {
 
 	private static FinishedPocketCalculatorState instance;
 

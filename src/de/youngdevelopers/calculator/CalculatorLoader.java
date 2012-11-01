@@ -7,7 +7,10 @@ import de.youngdevelopers.calculator.controller.PocketCalculatorController;
 import de.youngdevelopers.calculator.view.CalculatorView;
 import de.youngdevelopers.calculator.view.PocketCalculatorView;
 
-public class CalculatorLoader {
+public final class CalculatorLoader {
+	
+	private CalculatorLoader() {
+	}
 
 	public static void main(String[] args) {
 		startPocketCalculator();

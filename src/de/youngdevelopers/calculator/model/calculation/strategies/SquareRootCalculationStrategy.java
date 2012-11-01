@@ -1,6 +1,6 @@
 package de.youngdevelopers.calculator.model.calculation.strategies;
 
-public class SquareRootCalculationStrategy extends UnaryCalculationStrategy {
+public final class SquareRootCalculationStrategy extends UnaryCalculationStrategy {
 
 	private static CalculationStrategy instance;
 

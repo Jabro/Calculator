@@ -1,6 +1,6 @@
 package de.youngdevelopers.calculator.model.display.states;
 
-public class IntegerDisplayState extends DisplayState {
+public final class IntegerDisplayState extends DisplayState {
 
 	private static IntegerDisplayState instance;
 

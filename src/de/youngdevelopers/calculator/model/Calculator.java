@@ -4,18 +4,18 @@ import de.youngdevelopers.calculator.model.display.event.DisplayEventListener;
 
 public interface Calculator {
 
-	public void addListener(DisplayEventListener listener);
+	void addListener(DisplayEventListener listener);
 
-	public void removeListener(DisplayEventListener listener);
+	void removeListener(DisplayEventListener listener);
 
-	public void useOperator(Operator operator);
+	void useOperator(Operator operator);
 
-	public void calculateFromEqualSign();
+	void calculateFromEqualSign();
 
-	public void useInput(String input);
+	void useInput(String input);
 
-	public void executeClear();
+	void executeClear();
 
-	public Display getDisplay();
+	Display getDisplay();
 
 }

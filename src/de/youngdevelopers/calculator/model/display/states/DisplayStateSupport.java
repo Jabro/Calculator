@@ -2,7 +2,7 @@ package de.youngdevelopers.calculator.model.display.states;
 
 public interface DisplayStateSupport {
 	
-	static final String INITIAL_VALUE = "0";
+	String INITIAL_VALUE = "0";
 
 	void setState(DisplayState state);
 

@@ -1,6 +1,6 @@
 package de.youngdevelopers.calculator.model.calculation.strategies;
 
-public class PlusCalculationStrategy extends BinaryCalculationStrategy {
+public final class PlusCalculationStrategy extends BinaryCalculationStrategy {
 
 	private static CalculationStrategy instance;
 

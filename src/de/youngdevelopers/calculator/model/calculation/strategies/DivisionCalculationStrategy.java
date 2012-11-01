@@ -1,6 +1,6 @@
 package de.youngdevelopers.calculator.model.calculation.strategies;
 
-public class DivisionCalculationStrategy extends BinaryCalculationStrategy {
+public final class DivisionCalculationStrategy extends BinaryCalculationStrategy {
 
 	private static CalculationStrategy instance;
 

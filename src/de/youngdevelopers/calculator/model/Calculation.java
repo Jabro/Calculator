@@ -38,9 +38,7 @@ public class Calculation {
 	}
 
 	public double calculate() {
-		result = calculationStrategy.calculate(firstOperand, secondOperand);
-		System.out.println(this);	
-		return result;
+		return calculationStrategy.calculate(firstOperand, secondOperand);
 	}
 
 	@Override

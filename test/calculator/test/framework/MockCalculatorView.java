@@ -13,7 +13,7 @@ import de.youngdevelopers.calculator.view.CalculatorView;
 
 public class MockCalculatorView implements CalculatorView, CalculationTestSupport {
 
-	public String content;
+	private String content;
 	private Map<String, Command> commands = new HashMap<String, Command>();
 
 	public void enterDigit(int digit) {

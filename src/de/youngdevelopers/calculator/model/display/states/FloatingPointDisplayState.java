@@ -1,6 +1,6 @@
 package de.youngdevelopers.calculator.model.display.states;
 
-public class FloatingPointDisplayState extends DisplayState {
+public final class FloatingPointDisplayState extends DisplayState {
 
 	private static FloatingPointDisplayState instance;
 

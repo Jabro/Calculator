@@ -45,7 +45,8 @@ public class PocketCalculator implements Calculator, PocketCalculatorStateSuppor
 	
 	@Override
 	public void executeClear() {
-		lastOperand = operand = 0;
+		operand = 0;
+		lastOperand = 0;
 		state = ClearPocketCalculatorState.getInstance();
 		display.clear();
 	}

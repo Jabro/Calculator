@@ -18,6 +18,9 @@ import de.youngdevelopers.calculator.model.Display;
 
 public class PocketCalculatorView implements CalculatorView {
 
+	private static final int COLUMN_COUNT = 3;
+	private static final int DEFAULT_FRAME_HEIGHT = 350;
+	private static final int DEFAULT_FRAME_WIDTH  = 350;
 	private JTextField displayField;
 
 	@Override
@@ -29,7 +32,7 @@ public class PocketCalculatorView implements CalculatorView {
 		frame.setLayout(new BorderLayout());
 		frame.add(displayField, BorderLayout.NORTH);
 		frame.add(panel);		
-		frame.setSize(350, 350);		
+		frame.setSize(DEFAULT_FRAME_WIDTH, DEFAULT_FRAME_HEIGHT);		
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
@@ -56,7 +59,7 @@ public class PocketCalculatorView implements CalculatorView {
 
 	private JPanel createPanel() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0, 3, 0, 0));
+		panel.setLayout(new GridLayout(0, COLUMN_COUNT, 0, 0));
 		return panel;
 	}
 

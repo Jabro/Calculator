@@ -18,6 +18,8 @@ import de.youngdevelopers.calculator.view.CalculatorView;
 
 public class PocketCalculatorController implements CalculatorController, DisplayEventListener {
 
+	private static final int FIRST_DIGIT = 0;
+	private static final int LAST_DIGIT = 9;
 	private final Collection<CalculatorView> views;
 	private final Calculator calculator;
 
@@ -52,7 +54,7 @@ public class PocketCalculatorController implements CalculatorController, Display
 
 	private Collection<Command> createCommands() {
 		final Collection<Command> commands = new ArrayList<Command>();
-		for (int i = 0; i <= 9; i++) {
+		for (int i = FIRST_DIGIT; i <= LAST_DIGIT; i++) {
 			commands.add(new InputDigitCommand(calculator, i));
 		}
 		commands.add(new InputCommand(calculator, "."));

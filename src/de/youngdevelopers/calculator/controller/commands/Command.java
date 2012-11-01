@@ -12,7 +12,7 @@ public abstract class Command {
 		return name;
 	}
 	
-	abstract public void execute();
+	public abstract void execute();
 
 	@Override
 	public String toString() {

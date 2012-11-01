@@ -1,6 +1,6 @@
 package de.youngdevelopers.calculator.model.display.states;
 
-public class ClearDisplayState extends DisplayState {
+public final class ClearDisplayState extends DisplayState {
 
 	private static ClearDisplayState instance;
 
