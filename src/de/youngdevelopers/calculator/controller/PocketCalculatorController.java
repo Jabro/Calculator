@@ -54,10 +54,19 @@ public class PocketCalculatorController implements CalculatorController, Display
 
 	private Collection<Command> createCommands() {
 		final Collection<Command> commands = new ArrayList<Command>();
+		createInputCommands(commands);
+		createNonInputCommands(commands);
+		return commands;
+	}
+
+	private void createInputCommands(final Collection<Command> commands) {
 		for (int i = FIRST_DIGIT; i <= LAST_DIGIT; i++) {
 			commands.add(new InputDigitCommand(calculator, i));
 		}
 		commands.add(new InputCommand(calculator, "."));
+	}
+
+	private void createNonInputCommands(final Collection<Command> commands) {
 		for (Operator operator : Operator.values()) {
 			if(operator == Operator.SQUARE_ROOT) {
 				continue;
@@ -67,7 +76,6 @@ public class PocketCalculatorController implements CalculatorController, Display
 		commands.add(new CalculateCommand(calculator));
 		commands.add(new ClearCommand(calculator));
 		commands.add(new OperatorCommand(calculator, Operator.SQUARE_ROOT));
-		return commands;
 	}
 
 }
