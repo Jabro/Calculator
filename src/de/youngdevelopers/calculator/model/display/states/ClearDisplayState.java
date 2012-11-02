@@ -19,13 +19,21 @@ public final class ClearDisplayState extends DisplayState {
 		if(display.isInitialValue(suffix)) {
 			return;
 		}
-		if(!isDezimalPoint(suffix)) {
-			display.setState(IntegerDisplayState.getInstance());
-			display.setContent(suffix);
+		if(isDezimalPoint(suffix)) {
+			setDezimalPoint(display, suffix);
 		} else {
-			display.setState(FloatingPointDisplayState.getInstance());
-			display.setContent(DisplayStateSupport.INITIAL_VALUE + suffix);
+			setDigit(display, suffix);
 		}
+	}
+
+	private void setDezimalPoint(DisplayStateSupport display, String suffix) {
+		display.setState(FloatingPointDisplayState.getInstance());
+		display.setContent(DisplayStateSupport.INITIAL_VALUE + suffix);
+	}
+
+	private void setDigit(DisplayStateSupport display, String suffix) {
+		display.setState(IntegerDisplayState.getInstance());
+		display.setContent(suffix);
 	}
 
 }

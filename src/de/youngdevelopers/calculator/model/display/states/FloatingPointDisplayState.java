@@ -19,7 +19,11 @@ public final class FloatingPointDisplayState extends DisplayState {
 		if(isDezimalPoint(suffix)) {
 			return;
 		}
-		display.setContent(display.getContent() +  suffix);
+		addDigit(display, suffix);
+	}
+
+	private void addDigit(DisplayStateSupport display, String digit) {
+		display.setContent(display.getContent() +  digit);
 	}
 
 }
