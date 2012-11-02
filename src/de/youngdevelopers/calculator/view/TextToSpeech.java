@@ -1,53 +1,39 @@
 package de.youngdevelopers.calculator.view;
 
 import java.io.IOException;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class TextToSpeech extends Thread {
+public final class TextToSpeech implements Runnable {
 
 	private static final String QUOTE         = "\"";
 	private static final String ESCAPED_QUOTE = "\\\"";
 	private static final String SCRIPT_PATH   = "scripts\\calculator\\view\\";
 	private static final String SCRIPT_NAME   = "textToSpeech.vbs";
 	private static final int NO_ERROR = 0;
-	private static TextToSpeech instance;
-	private static final  Queue<String> TEXT_QUEUE = new ConcurrentLinkedQueue<String>();
-
+	private final String text;
+	private static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor();
+	
+	private TextToSpeech(String text) {
+		this.text = text;
+	}
+	
 	static void speak(String text) {
-		TEXT_QUEUE.add(text);
-		if(instance == null) {
-			synchronized (TEXT_QUEUE) {
-				if(instance == null) {
-					instance = new TextToSpeech();
-					instance.start();
-				}
-			}
-		}
+		EXECUTOR.execute(new TextToSpeech(text));
 	}
 
+	@Override
 	public void run() {
-		String text = null;
-		do{
-			if((text = TEXT_QUEUE.poll()) != null) {
-				runProcess(text);
-			} else {
-				instance = null;
-			}
-		} while(instance != null);
-	}
-
-	private void runProcess(String text) {
 		try {
 			Process prozess = Runtime.getRuntime().exec(createCommand(text));
 			int errorCode = prozess.waitFor();
 			if(errorCode != NO_ERROR) {
-				throw new RuntimeException("TextToSpeech not working correctly got error code:" + errorCode);
+				throw new TextToSpeechRuntimeException("TextToSpeech not working correctly got error code:" + errorCode);
 			}
 		} catch(IOException e) {
-			throw new RuntimeException("TextToSpeech not working correctly got exception with message:" + e.getMessage(), e);
+			throw new TextToSpeechRuntimeException("TextToSpeech not working correctly got exception with message:" + e.getMessage(), e);
 		} catch (InterruptedException e) {
-			throw new RuntimeException("TextToSpeech not working correctly got exception with message:" + e.getMessage(), e);
+			throw new TextToSpeechRuntimeException("TextToSpeech not working correctly got exception with message:" + e.getMessage(), e);
 		}
 	}
 
