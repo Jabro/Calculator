@@ -18,13 +18,8 @@ public final class FinishedPocketCalculatorState extends PocketCalculatorState {
 
 	@Override
 	public void useOperator(PocketCalculatorStateSupport calculator, Operator operator) {
-		if(operator == Operator.SQUARE_ROOT){
-			calculateSquareRoot(calculator, operator);
-			calculator.setState(FirstOperandPocketCalculatorState.getInstance(), true);
-			return;
-		}
-		calculator.setState(OperatorSetPocketCalculatorState.getInstance());
-		super.useOperator(calculator, operator);
+		// tread result as first operand
+		FirstOperandPocketCalculatorState.getInstance().useOperator(calculator, operator);
 	}
 
 	@Override
