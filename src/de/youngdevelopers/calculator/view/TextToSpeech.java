@@ -25,16 +25,18 @@ public final class TextToSpeech implements Runnable {
 	@Override
 	public void run() {
 		try {
-			Process prozess = Runtime.getRuntime().exec(createCommand(text));
-			int errorCode = prozess.waitFor();
-			if(errorCode != NO_ERROR) {
-				throw new TextToSpeechRuntimeException("TextToSpeech not working correctly got error code:" + errorCode);
-			}
-		} catch(IOException e) {
-			throw new TextToSpeechRuntimeException("TextToSpeech not working correctly got exception with message:" + e.getMessage(), e);
-		} catch (InterruptedException e) {
+			runProcess();
+		} catch(IOException | InterruptedException e) {
 			throw new TextToSpeechRuntimeException("TextToSpeech not working correctly got exception with message:" + e.getMessage(), e);
 		}
+	}
+
+	private void runProcess() throws IOException, InterruptedException {
+		Process process = Runtime.getRuntime().exec(createCommand(text));
+		int errorCode = process.waitFor();
+		if(errorCode != NO_ERROR) {
+			throw new TextToSpeechRuntimeException("TextToSpeech not working correctly got error code:" + errorCode);
+		}		
 	}
 
 	private String createCommand(String text) {
