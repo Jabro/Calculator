@@ -1,8 +1,7 @@
-package de.youngdevelopers.calculator.model.display.event;
+package de.youngdevelopers.calculator.model;
 
 import java.util.EventObject;
 
-import de.youngdevelopers.calculator.model.Display;
 
 public class DisplayChangedEvent extends EventObject{
 

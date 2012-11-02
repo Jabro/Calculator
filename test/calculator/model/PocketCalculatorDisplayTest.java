@@ -4,19 +4,19 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import de.youngdevelopers.calculator.model.Display;
+import de.youngdevelopers.calculator.model.pocketcalculator.display.PocketCalculatorDisplay;
 
 
-public class DisplayTest {
+public class PocketCalculatorDisplayTest {
 
 	@Test
-	public void testDisplay() {
-		assertEquals("0", new Display().getContent());
+	public void testPocketCalculatorDisplay() {
+		assertEquals("0", new PocketCalculatorDisplay().getContent());
 	}
 
 	@Test
-	public void testClearDisplay() {
-		Display display = new Display();
+	public void testClearPocketCalculatorDisplay() {
+		PocketCalculatorDisplay display = new PocketCalculatorDisplay();
 		display.setNumber(20.0);
 		display.clear();
 		assertEquals("0", display.getContent());
@@ -24,30 +24,30 @@ public class DisplayTest {
 
 	@Test
 	public void testAddDigit() {
-		Display display = new Display();
+		PocketCalculatorDisplay display = new PocketCalculatorDisplay();
 		display.addDigit(2);
 		assertEquals("2", display.getContent());
 	}
 
 	@Test
-	public void testAddContentToNotZeroDisplay() {
-		Display display = new Display();
+	public void testAddContentToNotZeroPocketCalculatorDisplay() {
+		PocketCalculatorDisplay display = new PocketCalculatorDisplay();
 		display.addDigit(2);
 		display.addContent(".");
 		assertEquals("2.", display.getContent());
 	}
 	
 	@Test
-	public void testAddContentToZeroDisplay() {
-		Display display = new Display();
+	public void testAddContentToZeroPocketCalculatorDisplay() {
+		PocketCalculatorDisplay display = new PocketCalculatorDisplay();
 		display.addDigit(0);
 		display.addContent(".");
 		assertEquals("0.", display.getContent());
 	}
 	
 	@Test
-	public void testAddContentToClearedDisplay() {
-		Display display = new Display();
+	public void testAddContentToClearedPocketCalculatorDisplay() {
+		PocketCalculatorDisplay display = new PocketCalculatorDisplay();
 		display.clear();
 		display.addContent(".");
 		assertEquals("0.", display.getContent());
@@ -55,7 +55,7 @@ public class DisplayTest {
 	
 	@Test
 	public void testAddTwoDecimalPoints() {
-		Display display = new Display();
+		PocketCalculatorDisplay display = new PocketCalculatorDisplay();
 		display.clear();
 		display.addContent(".");
 		display.addContent(".");
@@ -64,7 +64,7 @@ public class DisplayTest {
 	
 	@Test
 	public void testAddOneDigitBeteenTwoDecimalPoints() {
-		Display display = new Display();
+		PocketCalculatorDisplay display = new PocketCalculatorDisplay();
 		display.clear();
 		display.addContent(".");
 		display.addDigit(3);
@@ -73,8 +73,8 @@ public class DisplayTest {
 	}
 
 	@Test
-	public void testSetDisplay() {
-		Display display = new Display();
+	public void testSetPocketCalculatorDisplay() {
+		PocketCalculatorDisplay display = new PocketCalculatorDisplay();
 		display.setNumber(20.0);
 		assertEquals("20", display.getContent());
 	}

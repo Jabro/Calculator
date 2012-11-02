@@ -1,8 +1,9 @@
-package de.youngdevelopers.calculator.view;
+package de.youngdevelopers.calculator.view.texttospeech;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 
 public final class TextToSpeech implements Runnable {
 
@@ -18,7 +19,7 @@ public final class TextToSpeech implements Runnable {
 		this.text = text;
 	}
 	
-	static void speak(String text) {
+	public static void speak(String text) {
 		EXECUTOR.execute(new TextToSpeech(text));
 	}
 

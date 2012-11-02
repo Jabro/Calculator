@@ -1,4 +1,4 @@
-package de.youngdevelopers.calculator.view;
+package de.youngdevelopers.calculator.view.texttospeech;
 
 public class TextToSpeechRuntimeException extends RuntimeException {
 

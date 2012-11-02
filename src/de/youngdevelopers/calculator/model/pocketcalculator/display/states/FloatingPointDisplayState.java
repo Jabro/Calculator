@@ -1,4 +1,4 @@
-package de.youngdevelopers.calculator.model.display.states;
+package de.youngdevelopers.calculator.model.pocketcalculator.display.states;
 
 public final class FloatingPointDisplayState extends DisplayState {
 

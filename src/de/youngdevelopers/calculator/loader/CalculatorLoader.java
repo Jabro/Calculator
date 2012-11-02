@@ -1,11 +1,11 @@
-package de.youngdevelopers.calculator;
+package de.youngdevelopers.calculator.loader;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import de.youngdevelopers.calculator.controller.PocketCalculatorController;
 import de.youngdevelopers.calculator.view.CalculatorView;
-import de.youngdevelopers.calculator.view.PocketCalculatorView;
+import de.youngdevelopers.calculator.view.pocketcalculator.PocketCalculatorView;
 
 public final class CalculatorLoader {
 	

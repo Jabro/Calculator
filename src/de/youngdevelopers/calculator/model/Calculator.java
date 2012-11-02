@@ -1,6 +1,5 @@
 package de.youngdevelopers.calculator.model;
 
-import de.youngdevelopers.calculator.model.display.event.DisplayEventListener;
 
 public interface Calculator {
 

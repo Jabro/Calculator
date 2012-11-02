@@ -1,4 +1,4 @@
-package de.youngdevelopers.calculator.model.states;
+package de.youngdevelopers.calculator.model.pocketcalculator;
 
 import de.youngdevelopers.calculator.model.Operator;
 

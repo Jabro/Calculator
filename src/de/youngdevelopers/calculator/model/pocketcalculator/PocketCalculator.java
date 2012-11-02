@@ -1,21 +1,22 @@
-package de.youngdevelopers.calculator.model;
+package de.youngdevelopers.calculator.model.pocketcalculator;
 
-import de.youngdevelopers.calculator.model.display.event.DisplayEventListener;
-import de.youngdevelopers.calculator.model.states.ClearPocketCalculatorState;
-import de.youngdevelopers.calculator.model.states.PocketCalculatorState;
-import de.youngdevelopers.calculator.model.states.PocketCalculatorStateSupport;
+import de.youngdevelopers.calculator.model.Calculator;
+import de.youngdevelopers.calculator.model.Display;
+import de.youngdevelopers.calculator.model.DisplayEventListener;
+import de.youngdevelopers.calculator.model.Operator;
+import de.youngdevelopers.calculator.model.pocketcalculator.display.PocketCalculatorDisplay;
 
 public class PocketCalculator implements Calculator, PocketCalculatorStateSupport {
 
 	private boolean isOperandFinished = false;
-	private Display display;
+	private PocketCalculatorDisplay display;
 	private double operand;
 	private double lastOperand;
 	private PocketCalculatorState state = ClearPocketCalculatorState.getInstance();
 	private Operator operator;
 
 	public PocketCalculator() {
-		display = new Display();
+		display = new PocketCalculatorDisplay();
 	}
 
 	@Override

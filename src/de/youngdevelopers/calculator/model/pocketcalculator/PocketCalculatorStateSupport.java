@@ -1,7 +1,8 @@
-package de.youngdevelopers.calculator.model.states;
+package de.youngdevelopers.calculator.model.pocketcalculator;
 
 import de.youngdevelopers.calculator.model.Display;
 import de.youngdevelopers.calculator.model.Operator;
+
 
 public interface PocketCalculatorStateSupport {
 

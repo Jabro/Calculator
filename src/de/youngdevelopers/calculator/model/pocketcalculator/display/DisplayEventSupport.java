@@ -1,6 +1,9 @@
-package de.youngdevelopers.calculator.model.display.event;
+package de.youngdevelopers.calculator.model.pocketcalculator.display;
 
 import javax.swing.event.EventListenerList;
+
+import de.youngdevelopers.calculator.model.DisplayChangedEvent;
+import de.youngdevelopers.calculator.model.DisplayEventListener;
 
 public class DisplayEventSupport {
 	

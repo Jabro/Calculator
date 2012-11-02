@@ -1,4 +1,4 @@
-package de.youngdevelopers.calculator.view;
+package de.youngdevelopers.calculator.view.pocketcalculator;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,6 +15,9 @@ import de.youngdevelopers.calculator.controller.commands.Command;
 import de.youngdevelopers.calculator.controller.commands.InputDigitCommand;
 import de.youngdevelopers.calculator.model.Calculator;
 import de.youngdevelopers.calculator.model.Display;
+import de.youngdevelopers.calculator.view.CalculatorView;
+import de.youngdevelopers.calculator.view.CommandInvoker;
+import de.youngdevelopers.calculator.view.texttospeech.TextToSpeech;
 
 public class PocketCalculatorView implements CalculatorView {
 

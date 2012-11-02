@@ -1,4 +1,4 @@
-package de.youngdevelopers.calculator.model.display.event;
+package de.youngdevelopers.calculator.model;
 
 import java.util.EventListener;
 

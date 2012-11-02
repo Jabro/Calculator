@@ -10,13 +10,13 @@ import de.youngdevelopers.calculator.controller.commands.InputCommand;
 import de.youngdevelopers.calculator.controller.commands.InputDigitCommand;
 import de.youngdevelopers.calculator.controller.commands.OperatorCommand;
 import de.youngdevelopers.calculator.model.Calculator;
+import de.youngdevelopers.calculator.model.DisplayChangedEvent;
+import de.youngdevelopers.calculator.model.DisplayEventListener;
 import de.youngdevelopers.calculator.model.Operator;
-import de.youngdevelopers.calculator.model.PocketCalculator;
-import de.youngdevelopers.calculator.model.display.event.DisplayChangedEvent;
-import de.youngdevelopers.calculator.model.display.event.DisplayEventListener;
+import de.youngdevelopers.calculator.model.pocketcalculator.PocketCalculator;
 import de.youngdevelopers.calculator.view.CalculatorView;
 
-public class PocketCalculatorController implements CalculatorController, DisplayEventListener {
+public class PocketCalculatorController implements DisplayEventListener {
 
 	private static final int FIRST_DIGIT = 0;
 	private static final int LAST_DIGIT = 9;
